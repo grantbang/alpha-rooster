@@ -1,0 +1,52 @@
+{
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true,
+    "python": true,
+    "javascript": true,
+    "html": true,
+    "css": true
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  
+  // Enforce code quality
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic",
+  
+  // Auto-format on save
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  
+  // Copilot chat settings
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.useProjectTemplates": true,
+  
+  // File associations
+  "files.associations": {
+    "*.md": "markdown",
+    ".env*": "plaintext",
+    "Dockerfile": "dockerfile"
+  },
+  
+  // Exclude from search/watch
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/*.pyc": true
+  },
+  
+  // Terminal settings
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}"
+  },
+  
+  // Recommended extensions check
+  "extensions.ignoreRecommendations": false
+}

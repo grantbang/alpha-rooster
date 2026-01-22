@@ -1,0 +1,124 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Run FastAPI Dev Server",
+      "type": "shell",
+      "command": "source venv/bin/activate && uvicorn app.main:app --reload --host 0.0.0.0 --port 8080",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 Test Postback Endpoint",
+      "type": "shell",
+      "command": "curl 'http://localhost:8080/postback?subId1=test-${input:eventId}&payout=${input:payout}&secret=${env:AFFILIATE_SECRET}'",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📊 Query BigQuery Events (Last 10)",
+      "type": "shell",
+      "command": "bq query --use_legacy_sql=false 'SELECT event_id, fbclid, variant_id, interaction_result, timestamp FROM `${env:GCP_PROJECT_ID}.${env:BIGQUERY_DATASET}.game_events` ORDER BY timestamp DESC LIMIT 10'",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📊 Query BigQuery Conversions (Last 10)",
+      "type": "shell",
+      "command": "bq query --use_legacy_sql=false 'SELECT event_id, payout, status, conversion_time FROM `${env:GCP_PROJECT_ID}.${env:BIGQUERY_DATASET}.conversion_signals` ORDER BY conversion_time DESC LIMIT 10'",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📦 Build Docker Image",
+      "type": "shell",
+      "command": "docker build -t rooster-game .",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🐳 Run Docker Container (Local Test)",
+      "type": "shell",
+      "command": "docker run -p 8080:8080 --env-file .env rooster-game",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "dependsOn": ["📦 Build Docker Image"]
+    },
+    {
+      "label": "☁️ Deploy to Cloud Run",
+      "type": "shell",
+      "command": "gcloud run deploy rooster-game --source . --region us-central1 --allow-unauthenticated --set-env-vars GCP_PROJECT_ID=${env:GCP_PROJECT_ID},BIGQUERY_DATASET=${env:BIGQUERY_DATASET} --set-secrets META_ACCESS_TOKEN=meta-token:latest,AFFILIATE_SECRET=affiliate-secret:latest",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "✅ Validate Environment Variables",
+      "type": "shell",
+      "command": "python3 -c \"import os; from dotenv import load_dotenv; load_dotenv(); required=['GCP_PROJECT_ID','BIGQUERY_DATASET','META_PIXEL_ID','META_ACCESS_TOKEN','AFFILIATE_SECRET']; missing=[v for v in required if not os.getenv(v)]; print('✅ All required vars set!' if not missing else f'❌ Missing: {missing}')\"",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🔍 Check Cloud Run Logs (Last 50 lines)",
+      "type": "shell",
+      "command": "gcloud run services logs read rooster-game --region us-central1 --limit 50",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "📈 Daily Performance Report",
+      "type": "shell",
+      "command": "bq query --use_legacy_sql=false 'SELECT COUNT(DISTINCT event_id) as clicks, COUNT(DISTINCT CASE WHEN interaction_result IS NOT NULL THEN event_id END) as plays, COUNT(DISTINCT cs.event_id) as conversions, ROUND(SUM(cs.payout), 2) as revenue FROM `${env:GCP_PROJECT_ID}.${env:BIGQUERY_DATASET}.game_events` ge LEFT JOIN `${env:GCP_PROJECT_ID}.${env:BIGQUERY_DATASET}.conversion_signals` cs USING(event_id) WHERE DATE(ge.timestamp) = CURRENT_DATE()'",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "eventId",
+      "type": "promptString",
+      "description": "Event ID for test postback:",
+      "default": "test-123"
+    },
+    {
+      "id": "payout",
+      "type": "promptString",
+      "description": "Payout amount (USD):",
+      "default": "15.00"
+    }
+  ]
+}

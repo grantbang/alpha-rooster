@@ -10,11 +10,14 @@ ENV/
 .venv
 
 # IDEs
-.vscode/
 .idea/
 *.swp
 *.swo
 *~
+
+# VS Code - Allow workspace config, ignore user settings
+.vscode/settings.json.user
+.vscode/*.code-workspace
 
 # Environment variables
 .env

@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "github.copilot",
+    "github.copilot-chat",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "ms-toolsai.jupyter",
+    "googlecloudtools.cloudcode",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": []
+}
