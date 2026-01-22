@@ -9,6 +9,16 @@ This folder contains project documentation and progress tracking files.
 **Use:** Track daily progress, add verification proof, prevent "fake completions"  
 **Update:** Daily (check off tasks as you complete them)
 
+### [PHASE1_QUICKSTART.md](./PHASE1_QUICKSTART.md)
+**Purpose:** Fast-start guide for Phase 1 (Domain + Email + Affiliate Networks)  
+**Use:** Step-by-step instructions for Day 1 setup with exact commands and timelines  
+**Update:** Reference when starting Phase 1
+
+### [BUSINESS_PROFILE.md](./BUSINESS_PROFILE.md)
+**Purpose:** Complete business information reference for PoC phase  
+**Use:** Consistent signup info across all services (Impact.com, Meta, GCP, etc.)  
+**Update:** Fill in once with your details, then copy/paste when applying to services
+
 ### [WORKSPACE_SETUP.md](./WORKSPACE_SETUP.md)
 **Purpose:** Guide to using VS Code workspace features (tasks, debugger, Copilot)  
 **Use:** Reference when setting up workspace or learning workflow  

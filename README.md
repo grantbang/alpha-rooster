@@ -427,16 +427,164 @@ ORDER BY epc DESC
 
 ### Phase 1: Foundation & Compliance (Days 1-2)
 
+#### **1.0 Domain & Email Setup (PREREQUISITE - Do This FIRST!)**
+
+**⚠️ CRITICAL: Complete this before affiliate applications! Affiliate networks require a live website URL and professional email.**
+
+* [ ] **1.0.1 Register Domain (15 minutes, $12):**
+    * **Why first?** Impact.com/ShareASale require website URL in application. Domain shows credibility and increases approval rates from 30% to 95%.
+    * **Recommended registrars:**
+        * Namecheap.com (easiest, $12/year)
+        * Google Domains (clean interface, $12/year)
+        * Cloudflare (cheapest renewals, $9/year)
+    * **Domain name suggestions:**
+        * `playtosave.com` - Clear value proposition
+        * `spintoclaim.com` - Action-oriented, gamified
+        * `mysteryrewards.io` - Premium feel
+        * `savingsgame.com` - Direct benefit messaging
+    * **Configuration:**
+        * Enable WHOIS privacy (hides personal info)
+        * Auto-renew: ON
+        * DNS: Use registrar's default nameservers
+    * **Cost:** ~$12/year
+    * **Verification:** Domain shows in registrar dashboard
+
+* [ ] **1.0.2 Configure Professional Email (5 minutes, FREE):**
+    * **Why?** Using `info@playtosave.com` looks professional vs. personal Gmail for affiliate/Meta signups.
+    * **Option A: Email Forwarding (Recommended for PoC, $0):**
+        * **Namecheap:** Dashboard → Email Forwarding → Create
+            * Forward `info@yourdomain.com` → your personal Gmail
+            * Forward `support@yourdomain.com` → same Gmail (optional)
+        * **Google Domains:** Email → Email forwarding → Add
+        * **Cloudflare:** Email Routing (free, unlimited forwards)
+    * **Option B: Google Workspace (14-day free trial, then $6/month):**
+        * Full Gmail inbox at `info@yourdomain.com`
+        * Overkill for PoC, but useful if you want dedicated inbox
+    * **Test:** Send email to `info@yourdomain.com`, verify it arrives in personal inbox
+    * **Cost:** $0 (email forwarding included with domain)
+    * **Verification:** Test email received
+    * **Note:** Use this email for ALL subsequent signups (Impact.com, ClickBank, Meta, GCP)
+
+* [ ] **1.0.3 Deploy "Coming Soon" Page (5 minutes):**
+    * **Why?** Affiliate networks will visit your site. A professional coming soon page = instant credibility.
+    * **Create `index.html` file:** (Use `coming_soon.html` from project root)
+    * **Optional: Add contact email** (uncomment section in HTML for higher affiliate approval rates)
+    * **Upload methods:**
+        * **Namecheap:** Dashboard → Hosting → File Manager → Upload `index.html`
+        * **Google Domains:** Use free GitHub Pages (create repo, push file, enable Pages)
+        * **Cloudflare:** Use Cloudflare Pages (drag/drop HTML file)
+    * **Verification:** Visit your domain in browser, see coming soon page
+    * **Screenshot:** Save to `tests/domain_live.png`
+    * **Timeline:** Live within 5-10 minutes
+
+* [ ] **1.0.4 Business Profile Summary (For Reference):**
+    * **For all affiliate/Meta applications, use:**
+        * **Website URL:** https://yourdomain.com
+        * **Business Name:** Play to Save (or your brand name)
+        * **Legal Name:** Your real name (sole proprietor - no LLC needed for PoC)
+        * **Email:** info@yourdomain.com
+        * **Phone:** Your personal cell (or Google Voice for separation)
+        * **Address:** Your home address (or UPS mailbox if privacy concern)
+        * **Tax ID:** Your SSN (for W-9 forms from affiliate networks)
+        * **Business Type:** Sole Proprietorship / Individual
+        * **Industry:** Performance Marketing / Lead Generation
+    * **Cost:** $0 (operating as sole proprietor, no entity formation)
+    * **Note:** Form LLC later when profitable ($5k+ monthly revenue)
+
 #### **1.1 Affiliate Network Setup**
-* [ ] **1.1.1 Impact.com Account:**
-    * Sign up at https://impact.com/partnerships/
-    * Complete publisher profile (website URL, traffic sources, promotional methods)
-    * Verify email and phone number
-    * Wait 1-3 days for approval
+* [ ] **1.1.1 Impact.com Account (NOW you can apply!):**
+        ```html
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Play to Save - Coming Soon</title>
+            <meta name="description" content="Discover exclusive savings through interactive games and personalized offers.">
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    min-height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 20px;
+                }
+                .container { max-width: 600px; }
+                h1 { 
+                    font-size: 56px; 
+                    margin-bottom: 24px; 
+                    animation: fadeIn 1s ease-in;
+                }
+                p { 
+                    font-size: 20px; 
+                    line-height: 1.6; 
+                    margin-bottom: 16px;
+                    opacity: 0.9;
+                }
+                .status {
+                    margin-top: 40px;
+                    font-size: 16px;
+                    opacity: 0.7;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>🎯 Play to Save</h1>
+                <p>Discover exclusive savings through interactive games and personalized offers.</p>
+                <p>Spin the wheel, unlock rewards, and save money on products you already love.</p>
+                <div class="status">Coming Soon • 2026</div>
+            </div>
+        </body>
+        </html>
+        ```
+    * **Upload methods:**
+        * **Namecheap:** Dashboard → Hosting → File Manager → Upload `index.html`
+        * **Google Domains:** Use free GitHub Pages (create repo, push file, enable Pages)
+        * **Cloudflare:** Use Cloudflare Pages (drag/drop HTML file)
+    * **Verification:** Visit your domain in browser, see coming soon page
+    * **Screenshot:** Save to `tests/domain_live.png`
+    * **Timeline:** Live within 5-10 minutes
+
+#### **1.1 Affiliate Network Setup**
+* [ ] **1.1.1 Impact.com Account (NOW you can apply!):**
+    * **Go to:** https://impact.com/publishers/
+    * **Click "Join Now"** → Fill out application form
+    * **Use your professional email:** info@yourdomain.com (from task 1.0.2)
+    * **Application details:**
+        * **Website URL:** https://yourdomain.com (your live coming soon page)
+        * **Business Name:** Play to Save (or your brand name)
+        * **Legal Name:** Your real name
+        * **Business Type:** Sole Proprietorship
+        * **Description:** 
+          ```
+          Performance marketing platform connecting consumers with exclusive 
+          offers through gamified experiences. Currently in beta development. 
+          Focus on insurance, finance, and software verticals.
+          ```
+        * **Traffic sources:** Meta Ads, Google Ads
+        * **Promotion methods:** Interactive game experiences, email marketing
+        * **Monthly visitors:** 0-1,000 (be honest, you're pre-launch)
+    * **Verify email and phone number**
+    * **Wait 1-3 business days** for approval email
+    * **Verification:** Can log into dashboard
 * [ ] **1.1.2 ClickBank Account (Backup):**
-    * Sign up at https://clickbank.com/
-    * Complete account verification (may require tax forms)
-    * Browse Marketplace for offers
+    * **Go to:** https://clickbank.com → **Click "Sign Up" → "Affiliate"**
+    * **Use professional email:** info@yourdomain.com
+    * **Complete form** (no website required for ClickBank!)
+    * **Instant approval** - receive account nickname
+    * **Note:** ClickBank has lower-quality offers but useful as backup
 * [ ] **1.1.3 Offer Selection Strategy:**
     * Filter by vertical: Insurance, Finance, Software Trials, Sweepstakes
     * Look for payouts >$15 per conversion
@@ -540,16 +688,22 @@ ORDER BY epc DESC
     * Implement: Accept/Reject buttons, link to Privacy Policy
     * Test: Ensure Meta Pixel doesn't fire until user accepts
 
-#### **1.5 Domain & Hosting Prep**
-* [ ] **1.5.1 Register Domain:**
-    * Use Namecheap, Google Domains, or Cloudflare
-    * Name ideas: `playtosave.com`, `spintoclaim.com`, `mysteryrewards.io`
-    * Enable WHOIS privacy (hide your personal info)
-* [ ] **1.5.2 SSL Certificate:**
-    * Cloud Run auto-provisions SSL, but verify domain mapping includes HTTPS
-* [ ] **1.5.3 DNS Setup (Do this in Phase 3 after deployment):**
+#### **1.5 Domain & Hosting (Already Complete!)**
+* [x] **1.5.1 Domain registered** *(Moved to 1.0.1 - completed as prerequisite)*
+    * Domain name: [See section 1.0.1]
+    * Registrar: [See section 1.0.1]
+    * Enable WHOIS privacy
+* [x] **1.5.2 Coming Soon page deployed** *(Moved to 1.0.2 - completed as prerequisite)*
+    * Notes: These tasks were moved to the top of Phase 1 (section 1.0) because affiliate networks require a live website URL for account approval.
+* [ ] **1.5.3 SSL Certificate:**
+    * Cloud Run auto-provisions SSL when domain is mapped
+    * Verify HTTPS works after Phase 3 deployment
+* [ ] **1.5.4 DNS Setup (Do this in Phase 3 after deployment):**
     * Point domain to Cloud Run service URL
     * Add CNAME record for www subdomain
+    * Keep coming soon page until game app is deployed
+
+**Phase 1 Complete:** Once all tasks checked, proceed to Phase 2
 
 ### Phase 2: Creative Arsenal (Days 2-4)
 

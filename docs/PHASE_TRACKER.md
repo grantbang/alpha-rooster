@@ -2,23 +2,51 @@
 
 > **Instructions:** Check off tasks as you complete them. Add verification proof (screenshot filename, query result, etc.) in notes.
 
-**Started:** [Date]  
+**Started:** January 22, 2026  
 **Current Phase:** Phase 1  
-**Target Completion:** [Date + 12 days]
+**Target Completion:** February 3, 2026
 
 ---
 
 ## ✅ Phase 1: Foundation & Compliance (Days 1-2)
 
+### 1.0 Domain & Email Setup (PREREQUISITE - Do First!)
+- [x] **1.0.1** Domain registered
+  - Domain name: playtosave.net
+  - Registrar: Namecheap
+  - Cost: $12.98/year
+  - WHOIS privacy enabled: ✓
+  - Notes: ✅ COMPLETED - Domain purchased January 22, 2026
+- [x] **1.0.2** Professional email configured
+  - Method: Email forwarding (Namecheap)
+  - Email created: info@playtosave.net
+  - Forwarding to: Personal Gmail
+  - Test sent and received: ✓
+  - Cost: $0 (email forwarding included with domain)
+  - Notes: ✅ COMPLETED - Email forwarding working January 22, 2026
+- [ ] **1.0.3** Coming Soon page deployed
+  - File: `index.html` uploaded (from `coming_soon.html`)
+  - Live URL verified: 
+  - Screenshot: `tests/domain_live.png`
+  - Contact email visible: ✓ (optional, uncomment in HTML)
+  - Notes: Simple HTML page, no backend needed for PoC
+
 ### 1.1 Affiliate Network Setup
 - [ ] **1.1.1** Impact.com account created and approved
+  - Email used: info@[yourdomain].com
+  - Business name: [Your business name]
+  - Business type: Sole Proprietorship
   - Verification: Can log into dashboard
+  - Application submitted with domain URL: ✓
+  - Approval timeline: 1-3 business days
   - Notes: 
 - [ ] **1.1.2** ClickBank account created (backup)
+  - Email used: info@[yourdomain].com
   - Verification: Account number received
-  - Notes:
+  - Notes: Instant approval, no website required
 - [ ] **1.1.3** Applied to 5-10 offers
   - Approved offers: [List names and IDs]
+  - Target verticals: Insurance, Finance, Software
   - Notes:
 - [ ] **1.1.4** Tracking links documented
   - Spreadsheet created: [Link or filename]
@@ -50,7 +78,9 @@
 ### 1.3 Meta Business Manager Setup
 - [ ] **1.3.1** Business Manager account created
   - Business name: 
+  - Business email: info@[yourdomain].com
   - URL: https://business.facebook.com/
+  - Notes:
 - [ ] **1.3.2** Payment method added
   - Card added: ✓
   - Spending limit set: $500/month
@@ -82,12 +112,18 @@
   - Tested: ✓
 
 ### 1.5 Domain & Hosting
-- [ ] **1.5.1** Domain registered
-  - Domain name: 
-  - Registrar: 
+- [x] **1.5.1** Domain registered (moved to 1.0.1 - COMPLETED FIRST)
+  - Domain name: [See 1.0.1]
+  - Registrar: [See 1.0.1]
   - WHOIS privacy enabled: ✓
-- [ ] **1.5.2** SSL certificate
+- [x] **1.5.2** Professional email configured (moved to 1.0.2 - COMPLETED FIRST)
+  - Email: info@[yourdomain].com
+  - Notes: Use this email for all service signups
+- [x] **1.5.3** Coming Soon page deployed (moved to 1.0.3 - COMPLETED FIRST)
+  - Notes: These tasks moved to top of Phase 1 as prerequisite for affiliate applications
+- [ ] **1.5.4** SSL certificate
   - Handled by Cloud Run: ✓
+  - Notes: Will be configured during Phase 3 deployment
 
 **Phase 1 Complete:** [ ] All tasks checked, all verifications documented
 
