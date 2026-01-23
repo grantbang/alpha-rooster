@@ -24,12 +24,14 @@
   - Test sent and received: ✓
   - Cost: $0 (email forwarding included with domain)
   - Notes: ✅ COMPLETED - Email forwarding working January 22, 2026
-- [ ] **1.0.3** Coming Soon page deployed
+- [x] **1.0.3** Coming Soon page deployed
   - File: `index.html` uploaded (from `coming_soon.html`)
-  - Live URL verified: 
+  - Live URL verified: https://playtosave.net ✓
+  - Hosting: GitHub Pages (free)
+  - DNS: Fully propagated, SSL certificate active
   - Screenshot: `tests/domain_live.png`
   - Contact email visible: ✓ (optional, uncomment in HTML)
-  - Notes: Simple HTML page, no backend needed for PoC
+  - Notes: ✅ COMPLETED - Site live with HTTPS January 23, 2026
 
 ### 1.1 Affiliate Network Setup
 - [ ] **1.1.1** Impact.com account created and approved
