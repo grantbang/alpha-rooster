@@ -4,63 +4,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name='impact-site-verification' value='dee8e3d2-1ce9-4edf-bfb3-375c706ebcf9'>
-    <title>Play to Save - Coming Soon</title>
-    <meta name="description" content="Discover exclusive savings through interactive games and personalized offers.">
+    <title>Play to Save - Turn Games Into Savings | Launching Soon</title>
+    <meta name="description" content="Play interactive games to unlock exclusive savings on insurance, financial services, and everyday products. Get personalized offers that help you save money.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            text-align: center;
+            padding: 80px 20px;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            text-align: center;
-            padding: 20px;
         }
-        .container { max-width: 600px; }
-        h1 { 
-            font-size: 56px; 
-            margin-bottom: 24px; 
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 24px;
             animation: fadeIn 1s ease-in;
         }
-        p { 
-            font-size: 20px; 
-            line-height: 1.6; 
-            margin-bottom: 16px;
-            opacity: 0.9;
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .status {
             margin-top: 40px;
-            font-size: 16px;
-            opacity: 0.7;
+            font-size: 18px;
+            opacity: 0.8;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+        .content-section {
+            background: white;
+            padding: 80px 20px;
+        }
+        .content-section.alt {
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-align: center;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .feature {
+            text-align: center;
+            padding: 30px;
+        }
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .feature h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .feature p {
+            color: #666;
+            font-size: 16px;
+        }
+        .how-it-works {
+            margin-top: 50px;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 30px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .step-content p {
+            color: #666;
+        }
+        .faq {
+            margin-top: 50px;
+        }
+        .faq-item {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .faq-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .faq-item p {
+            color: #666;
+            font-size: 15px;
+        }
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        footer a:hover {
+            color: white;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .step { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎯 Play to Save</h1>
-        <p>Discover exclusive savings through interactive games and personalized offers.</p>
-        <p>Spin the wheel, unlock rewards, and save money on products you already love.</p>
-        <div class="status">Coming Soon • 2026</div>
-        
-        <!-- Optional: Uncomment for higher affiliate approval rates -->
-        <!--
-        <div style="margin-top: 60px; font-size: 14px; opacity: 0.6;">
-            <p>Contact: info@playtosave.com</p>
-            <p style="margin-top: 8px;">
-                <a href="privacy.html" style="color: white; margin: 0 10px;">Privacy</a> |
-                <a href="terms.html" style="color: white; margin: 0 10px;">Terms</a>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🎯 Play to Save</h1>
+            <p>Turn your time into savings! Play interactive games, unlock exclusive offers, and save money on insurance, financial services, and everyday products.</p>
+            <p style="font-size: 18px; opacity: 0.85;">Gamification meets smart shopping — discover personalized deals while having fun.</p>
+            <div class="status">Launching Soon • 2026</div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="content-section">
+        <div class="container">
+            <h2>Why Play to Save?</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Fun & Interactive</h3>
+                    <p>Spin the wheel, play mini-games, and unlock rewards. Saving money has never been this entertaining.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Real Savings</h3>
+                    <p>Get exclusive discounts on insurance quotes, financial products, software, and more. Save hundreds on services you need.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Personalized Offers</h3>
+                    <p>Answer quick questions to unlock offers tailored to your needs. No spam, just relevant deals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="content-section alt">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="how-it-works">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Answer Quick Questions</h3>
+                        <p>Tell us a bit about what you're looking for — insurance, loans, software, or other products. Takes less than 30 seconds.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Play the Game</h3>
+                        <p>Spin our reward wheel or play a quick mini-game. Every spin unlocks exclusive savings opportunities.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Claim Your Savings</h3>
+                        <p>Get matched with top-rated providers offering special discounts. Compare offers and choose the best deal for you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="content-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>Is Play to Save really free?</h3>
+                    <p>Yes! It's completely free to play and unlock offers. We partner with brands who pay us when you discover their services, so you never pay a dime.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What kind of offers will I get?</h3>
+                    <p>You'll see personalized offers for insurance quotes, financial products (loans, credit cards), software subscriptions, and everyday services — all with exclusive discounts.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do I have to buy anything?</h3>
+                    <p>Nope! Browse offers risk-free. You're only matched with products you might actually need, and you decide what (if anything) to purchase.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>When does Play to Save launch?</h3>
+                    <p>We're launching in early 2026. Sign up for early access to be notified when we go live and get exclusive launch bonuses!</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do you make money?</h3>
+                    <p>We earn commissions from partner brands when you discover and engage with their offers. This allows us to keep the platform free for users while delivering value to both sides.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Play to Save. All rights reserved.</p>
+            <p style="margin-top: 15px;">
+                <a href="mailto:info@playtosave.net">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </p>
         </div>
-        -->
-    </div>
+    </footer>
 </body>
 </html>
