@@ -1,0 +1,69 @@
+# Alpha Rooster - Python Dependencies
+# Phase 3: Game App
+#
+# What this file does: Defines all Python packages needed to run the application
+# Why it's needed: Ensures consistent dependencies across development and production
+# How to use: Run `pip install -r requirements.txt` after activating virtual environment
+
+# ========================================
+# WEB FRAMEWORK
+# ========================================
+
+# FastAPI - Modern web framework for building APIs
+# What: High-performance async framework for our game app routes
+# Why: Handles HTTP requests, routes (/qualify, /game, /postback), data validation
+fastapi==0.109.0
+
+# Uvicorn - ASGI server to run FastAPI
+# What: Production-ready web server with auto-reload for development
+# Why: Actually runs the FastAPI app and serves HTTP requests
+# [standard] includes websockets, httptools, uvloop for performance
+uvicorn[standard]==0.27.0
+
+# Jinja2 - Template engine for HTML rendering
+# What: Renders HTML templates (qualify.html, game.html) with dynamic data
+# Why: Server-side rendering for our pre-qualifier and game pages
+jinja2==3.1.3
+
+# Python-Multipart - Form data parser
+# What: Parses form submissions (age, state, fbclid from pre-qualifier)
+# Why: Required by FastAPI to process HTML form POST requests
+python-multipart==0.0.6
+
+# ========================================
+# ENVIRONMENT & CONFIGURATION
+# ========================================
+
+# Python-Dotenv - Environment variable loader
+# What: Loads variables from .env file (API keys, project IDs, secrets)
+# Why: Keeps sensitive credentials out of code, supports dev/prod configs
+python-dotenv==1.0.0
+
+# ========================================
+# GOOGLE CLOUD (Phase 3.5 - BigQuery)
+# ========================================
+
+# Google-Cloud-BigQuery - BigQuery client library
+# What: Connects to BigQuery to log events and query performance data
+# Why: Stores all game events, conversion signals, and analytics data
+# Used for: insert_rows_json(), query(), performance views
+google-cloud-bigquery==3.14.1
+
+# ========================================
+# META/FACEBOOK (Phase 4 - CAPI)
+# ========================================
+
+# Facebook-Business - Meta Marketing API SDK
+# What: Official SDK for Meta Conversions API (CAPI)
+# Why: Sends server-side conversion events to improve ad attribution
+# Used for: Event(), EventRequest(), UserData() objects
+facebook-business==19.0.0
+
+# ========================================
+# UTILITIES
+# ========================================
+
+# Requests - HTTP library for API calls
+# What: Makes HTTP requests to external APIs (affiliate networks, webhooks)
+# Why: Handles postback verification, external service communication
+requests==2.31.0

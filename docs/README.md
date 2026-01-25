@@ -4,28 +4,32 @@ This folder contains project documentation and progress tracking files.
 
 ## 📄 Files in This Directory
 
-### [PHASE_TRACKER.md](./PHASE_TRACKER.md)
-**Purpose:** Checkbox-based progress tracker for all 6 build phases  
-**Use:** Track daily progress, add verification proof, prevent "fake completions"  
-**Update:** Daily (check off tasks as you complete them)
+### Progress Tracking
+- **[PHASE_TRACKER.md](./PHASE_TRACKER.md)** - Checkbox-based progress tracker for all 6 build phases
+- **[PHASE1_QUICKSTART.md](./PHASE1_QUICKSTART.md)** - Fast-start guide for Phase 1 setup
 
-### [PHASE1_QUICKSTART.md](./PHASE1_QUICKSTART.md)
-**Purpose:** Fast-start guide for Phase 1 (Domain + Email + Affiliate Networks)  
-**Use:** Step-by-step instructions for Day 1 setup with exact commands and timelines  
-**Update:** Reference when starting Phase 1
+### Strategy & Decision-Making
+- **[CONTENT-CREATION-GUIDE.md](./CONTENT-CREATION-GUIDE.md)** - How to create ads without design skills (Canva, CapCut, templates)
+- **[DECISION-MAKING-GUIDE.md](./DECISION-MAKING-GUIDE.md)** - Decision framework (test → measure → optimize)
+- **[FULL-LIFECYCLE-WALKTHROUGH.md](./FULL-LIFECYCLE-WALKTHROUGH.md)** - Complete business flow explanation
+- **[PHASE3-ALIGNMENT-CHECK.md](./PHASE3-ALIGNMENT-CHECK.md)** - Mission verification for Phase 3 build
+
+### Reference Materials
+- **[maxbounty-approval-article.html](./maxbounty-approval-article.html)** - MaxBounty application guide (saved for reference)
 
 ---
 
-## 🔗 Other Important Docs
+## 🔗 Other Important Files
 
-These files are in the root directory:
-
+### In Root Directory
 - **[../README.md](../README.md)** - Complete project specification (Parts 1-6)
-- **[../CONTENT-CREATION-GUIDE.md](../CONTENT-CREATION-GUIDE.md)** - How to create ads without design skills (Canva, CapCut, templates)
-- **[../DECISION-MAKING-GUIDE.md](../DECISION-MAKING-GUIDE.md)** - Decision framework (test → measure → optimize)
+- **[../index.html](../index.html)** - Live website (playtosave.net)
+- **[../.env.example](../.env.example)** - Environment variable template
+
+### Configuration
 - **[../.github/copilot-instructions.md](../.github/copilot-instructions.md)** - Copilot coding rules (auto-loaded)
 - **[../.vscode/tasks.json](../.vscode/tasks.json)** - Available VS Code tasks
-- **[../.env.example](../.env.example)** - Environment variable template
+- **[../.gitignore](../.gitignore)** - Git exclusions
 
 ---
 
