@@ -14,23 +14,15 @@ This folder contains project documentation and progress tracking files.
 **Use:** Step-by-step instructions for Day 1 setup with exact commands and timelines  
 **Update:** Reference when starting Phase 1
 
-### [BUSINESS_PROFILE.md](./BUSINESS_PROFILE.md)
-**Purpose:** Complete business information reference for PoC phase  
-**Use:** Consistent signup info across all services (Impact.com, Meta, GCP, etc.)  
-**Update:** Fill in once with your details, then copy/paste when applying to services
-
-### [WORKSPACE_SETUP.md](./WORKSPACE_SETUP.md)
-**Purpose:** Guide to using VS Code workspace features (tasks, debugger, Copilot)  
-**Use:** Reference when setting up workspace or learning workflow  
-**Update:** Rarely (only when adding new tasks or configs)
-
 ---
 
 ## 🔗 Other Important Docs
 
-These files are in other locations but referenced frequently:
+These files are in the root directory:
 
 - **[../README.md](../README.md)** - Complete project specification (Parts 1-6)
+- **[../CONTENT-CREATION-GUIDE.md](../CONTENT-CREATION-GUIDE.md)** - How to create ads without design skills (Canva, CapCut, templates)
+- **[../DECISION-MAKING-GUIDE.md](../DECISION-MAKING-GUIDE.md)** - Decision framework (test → measure → optimize)
 - **[../.github/copilot-instructions.md](../.github/copilot-instructions.md)** - Copilot coding rules (auto-loaded)
 - **[../.vscode/tasks.json](../.vscode/tasks.json)** - Available VS Code tasks
 - **[../.env.example](../.env.example)** - Environment variable template
@@ -38,6 +30,27 @@ These files are in other locations but referenced frequently:
 ---
 
 ## 📊 Progress Overview
+
+**Last Updated:** January 25, 2026
+
+**Current Status: 20% Complete (Phase 1 in progress)**
+
+✅ **Completed:**
+- Domain purchased (playtosave.net)
+- Email configured (info@playtosave.net)
+- Coming soon page live
+- MaxBounty application submitted (ID: 784915)
+- Documentation created (content creation, decision-making guides)
+
+⏳ **In Progress:**
+- MaxBounty phone interview (pending 1-3 days)
+
+❌ **Not Started:**
+- GCP setup (BigQuery, Cloud Run)
+- Meta Business Manager setup
+- Legal docs (Privacy, Terms)
+- Ad creative production
+- Game app development (Phase 3)
 
 **Quick Status Check:**
 
