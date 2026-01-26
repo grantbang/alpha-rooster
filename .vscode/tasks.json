@@ -64,7 +64,9 @@
         "reveal": "always",
         "panel": "new"
       },
-      "dependsOn": ["📦 Build Docker Image"]
+      "dependsOn": [
+        "📦 Build Docker Image"
+      ]
     },
     {
       "label": "☁️ Deploy to Cloud Run",
