@@ -84,11 +84,35 @@
     // Pass fbclid from backend to JavaScript
     const fbclid = "{{ fbclid }}";
 
+    // Track ViewContent when game page loads
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+            content_name: 'Spin Wheel Game',
+            content_category: 'Game',
+            fbclid: fbclid
+        });
+        console.log('Meta Pixel: ViewContent tracked');
+    }
+
+    // Track when user clicks claim button
     document.getElementById('claimButton').addEventListener('click', function () {
+        // Track InitiateCheckout event before redirect
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout', {
+                content_name: 'Claim Reward',
+                fbclid: fbclid
+            });
+            console.log('Meta Pixel: InitiateCheckout tracked');
+        }
+
         // For now, redirect to a test offer URL (will connect to real affiliate link later)
         const testOfferUrl = `https://example.com/offer?fbclid=${fbclid}`;
         console.log('Redirecting to:', testOfferUrl);
-        window.location.href = testOfferUrl;
+        
+        // Small delay to ensure pixel fires
+        setTimeout(() => {
+            window.location.href = testOfferUrl;
+        }, 300);
     });
 </script>
 {% endblock %}

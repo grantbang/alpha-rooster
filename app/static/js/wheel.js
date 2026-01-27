@@ -85,6 +85,15 @@ function spinWheel() {
     spinButton.textContent = 'SPINNING...';
     resultDiv.classList.remove('show');
 
+    // Track spin event with Meta Pixel
+    if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'SpinWheel', {
+            content_name: 'Wheel Spin',
+            value: 1
+        });
+        console.log('Meta Pixel: SpinWheel custom event tracked');
+    }
+
     // Random spin (5-7 full rotations + random angle)
     const spins = 5 + Math.random() * 2;
     const finalRotation = spins * 2 * Math.PI + Math.random() * 2 * Math.PI;

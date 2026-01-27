@@ -108,6 +108,7 @@ async def get_qualify(request: Request, fbclid: str | None = None):
         "request": request,
         "fbclid": fbclid,
         "error": None,
+        "pixel_id": os.getenv("META_PIXEL_ID", ""),
     })
 
 @app.post("/qualify")
@@ -150,7 +151,8 @@ async def post_qualify(
             return templates.TemplateResponse("qualify.html", {
                 "request": request,
                 "fbclid": fbclid,
-                "error": "Sorry, this offer requires age 25+."
+                "error": "Sorry, this offer requires age 25+.",
+                "pixel_id": os.getenv("META_PIXEL_ID", ""),
             })
 
         # Preserve fbclid and route to game
@@ -180,6 +182,7 @@ async def get_game(request: Request, fbclid: str | None = None):
     return templates.TemplateResponse("game.html", {
         "request": request,
         "fbclid": fbclid or "demo",
+        "pixel_id": os.getenv("META_PIXEL_ID", ""),
     })
 
 if __name__ == "__main__":
