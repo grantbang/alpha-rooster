@@ -3,19 +3,20 @@
 > **Instructions:** Check off tasks as you complete them. Add verification proof (screenshot filename, query result, etc.) in notes.
 
 **Started:** January 22, 2026  
-**Current Phase:** Phase 3.5 (BigQuery Integration - Ready to Start)  
-**Target Completion:** February 3, 2026
+**Current Phase:** Phase 3.5 (BigQuery Integration - Starting Now)  
+**Last Updated:** February 4, 2026
 
 ---
 
 ## 📊 Overall Progress Summary
 
-**Phase 1: Foundation** - 25% Complete (4/16 tasks)
+**Phase 1: Foundation** - 31% Complete (5/16 tasks)
 - ✅ Domain & email setup complete
-- ✅ Coming soon page live
-- ✅ MaxBounty application submitted
-- ⏳ Awaiting phone interview
-- ❌ GCP setup not started
+- ✅ Coming soon page live at playtosave.net
+- ✅ MaxBounty account APPROVED (ID: 784915)
+- ✅ First CPA offer approved (Auto Insurance #29678, $6.75/lead)
+- ✅ Tracking link configured with SubID1
+- ❌ GCP setup not started (starting Phase 3.5)
 - ❌ Meta Business Manager not started
 - ❌ Legal docs not started
 
@@ -24,12 +25,14 @@
 - ❌ Game variants not started
 - ❌ A/B testing framework not started
 
-**Phase 3: Game App** - 57% Complete (17/30 tasks)
+**Phase 3: Game App** - 63% Complete (19/30 tasks)
 - ✅ Local development complete (Phase 3.1)
 - ✅ Pre-qualifier complete (Phase 3.2)
 - ✅ Game engine complete (Phase 3.3)
 - ✅ Meta Pixel tracking complete (Phase 3.4)
-- ⏳ BigQuery logging ready to build (Phase 3.5)
+- ✅ Real MaxBounty offer integrated and tested
+- ✅ End-to-end funnel working on localhost
+- ⏳ BigQuery logging starting now (Phase 3.5)
 - ❌ Deployment not started (Phase 3.6)
 
 **Phase 4-6** - 0% Complete
@@ -37,10 +40,13 @@
 - Phase 6.5 (AI Creative Scaling) is OPTIONAL - Only execute after Phase 6 shows ROAS > 1.5x
 
 **Next Steps:**
-1. Complete MaxBounty phone interview (Week 1-2)
-2. Build Phase 3.1-3.3 local prototype (Week 1-2)
-3. Create first ad creatives Phase 2.1 (Week 2)
-4. Launch first test campaign (Week 3)
+1. ✅ DONE: MaxBounty approved, first offer approved and tested
+2. ✅ DONE: Phase 3.1-3.4 complete (local prototype working)
+3. **NOW**: Build Phase 3.5 (BigQuery Integration)
+4. **NEXT**: Build Phase 3.6 (Deploy to Cloud Run)
+5. **THEN**: Setup Meta Business Manager (Phase 1.3)
+6. **THEN**: Create first ad creatives (Phase 2.1)
+7. **FINALLY**: Launch first test campaign (Phase 6.1)
 
 ---
 
@@ -76,18 +82,23 @@
   - Affiliate Manager: Taylor Fleming (ext 244)
   - Application submitted with domain URL: ✓
   - Status: Awaiting phone interview (1-3 days)
-  - Notes: ✅ SUBMITTED January 24, 2026 - Interview pending
-- [ ] **1.1.2** MaxBounty phone interview completed
-  - Interview date: [Pending]
-  - Approval status: [Pending]
-  - Notes: Will complete after building Phase 3.1-3.3 prototype
-- [ ] **1.1.3** Applied to first 3 CPA offers
-  - Target offers: Auto Insurance, Personal Loan, Life Insurance
-  - Approval status: [Pending MaxBounty approval first]
-  - Notes: Will apply after interview approval
-- [ ] **1.1.4** Tracking links documented
-  - Spreadsheet created: [Pending]
-  - Notes: Will create after offer approval
+  - Notes: ✅ SUBMITTED January 24, 2026
+- [x] **1.1.2** MaxBounty phone interview completed
+  - Interview date: January 28, 2026
+  - Approval status: ✅ APPROVED
+  - Notes: ✅ COMPLETED - Account active, ready to apply to offers
+- [x] **1.1.3** Applied to first CPA offer
+  - Offer #29678: YourInsurancePath Auto Insurance
+  - Payout: $6.75/lead, EPC: $0.34
+  - Traffic types: Display, Social, Mobile, Incentive (all approved)
+  - Approval status: ✅ APPROVED
+  - Notes: ✅ COMPLETED February 1, 2026
+- [x] **1.1.4** Tracking link configured
+  - Base URL: https://afflat3c1.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/
+  - SubID1 parameter: ?s1={FBCLID} for Facebook click tracking
+  - Integrated in game.html: ✓
+  - End-to-end test successful: ✓
+  - Notes: ✅ COMPLETED February 3, 2026 - Real offer live in funnel
 
 ### 1.2 Google Cloud Platform Setup
 - [ ] **1.2.1** GCP Project created: `rooster-social-game`
@@ -304,7 +315,9 @@
 - [x] **3.3.5** Claim redirect implemented
   - Test URL constructed with fbclid: ✓
   - JavaScript redirect works: ✓
-  - Notes: ✅ COMPLETED January 26, 2026 - Ready for real affiliate links
+  - Real MaxBounty tracking link integrated: ✓
+  - End-to-end funnel tested: qualify → spin → real insurance landing page: ✓
+  - Notes: ✅ COMPLETED February 3, 2026 - Real offer live and working!
 
 ### 3.4 Meta Pixel Integration
 - [x] **3.4.1** Base code added to `base.html`
@@ -328,13 +341,33 @@
   - Notes: ✅ COMPLETED January 27, 2026 - Ready for live testing with real Pixel ID
 
 ### 3.5 BigQuery Integration
-- [ ] **3.5.1** `bigquery_client.py` created
+- [ ] **3.5.1** GCP project created
+  - Project ID: rooster-social-game
+  - BigQuery API enabled: ✓
+  - Notes: Starting now - February 4, 2026
+- [ ] **3.5.2** BigQuery dataset and tables created
+  - Dataset: rooster_data
+  - Table: game_events (event_id, fbclid, variant_id, timestamp, etc.)
+  - Table: conversion_signals (event_id, payout, status, conversion_time)
+  - Schema verified: ✓
+- [ ] **3.5.3** `app/bigquery_client.py` created
   - Connection works: ✓
-  - Insert function works: ✓
-  - Update function works: ✓
-- [ ] **3.5.2** Tested writes
-  - Query result shows event: ✓
-  - Screenshot: `tests/bigquery_event.png`
+  - insert_event() function works: ✓
+  - insert_conversion() function works: ✓
+  - Error handling complete: ✓
+- [ ] **3.5.4** Logging added to routes
+  - /qualify logs form submission: ✓
+  - /game logs page view: ✓
+  - Claim button logs interaction: ✓
+  - All events include fbclid: ✓
+- [ ] **3.5.5** Local testing complete
+  - Events appear in BigQuery console: ✓
+  - Query verification:
+    ```sql
+    SELECT * FROM rooster_data.game_events 
+    ORDER BY timestamp DESC LIMIT 5
+    ```
+  - Screenshot: `tests/bigquery_first_events.png`
 
 ### 3.6 Deployment
 - [ ] **3.6.1** Dockerfile created
