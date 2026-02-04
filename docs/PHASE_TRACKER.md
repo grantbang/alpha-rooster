@@ -34,6 +34,7 @@
 
 **Phase 4-6** - 0% Complete
 - Phases 4, 5, 6 pending Phase 3 completion
+- Phase 6.5 (AI Creative Scaling) is OPTIONAL - Only execute after Phase 6 shows ROAS > 1.5x
 
 **Next Steps:**
 1. Complete MaxBounty phone interview (Week 1-2)
@@ -540,6 +541,183 @@
 - [ ] 1-2 winning combos identified
 
 **Phase 6 Complete:** [ ] Week 1 test finished, scaling decision made
+
+---
+
+## 🤖 Phase 6.5: AI Creative Scaling (OPTIONAL - Execute Only After Proven ROI)
+
+> **⚠️ TRIGGER CONDITION:** Only execute Phase 6.5 if Phase 6 shows **profitable ROI (ROAS > 1.5x)** after 2-3 weeks of testing.
+> 
+> **Goal:** Scale from 5-10 manual creatives → 100+ AI-generated variants per week
+> 
+> **Status:** ❌ Not Started (Execute only after Phase 6 profitability validated)
+
+### 6.5.1 AI Copy Generation Pipeline
+- [ ] **GPT-4 setup complete**
+  - OpenAI API key added to .env: ✓
+  - `scripts/generate_copy.py` created: ✓
+  - Test run generates 50 headline variants: ✓
+  - Test run generates 50 body text variants: ✓
+  - Output saved to `/creative_assets/ai_generated/copy_variants.json`: ✓
+  - Notes:
+- [ ] **Quality control passed**
+  - Manual review completed: ✓
+  - Usable rate: __%  (Target: 70%+)
+  - Policy violations filtered: ✓
+  - Off-brand tone filtered: ✓
+  - Notes:
+
+### 6.5.2 AI Image Generation Workflow
+- [ ] **Image generation setup complete**
+  - Tool selected: [Midjourney / DALL-E 3 / Replicate SDXL]
+  - API credentials configured: ✓
+  - `scripts/generate_images.py` created: ✓
+  - Test batch generated (10 images): ✓
+  - Output folder: `/creative_assets/ai_generated/images/batch_[date]/`
+  - Notes:
+- [ ] **Prompt templates created**
+  - Winning ad themes identified: ✓
+  - 5 prompt variations documented: ✓
+  - Age/gender/setting combinations: ✓
+  - Notes:
+- [ ] **Quality control passed**
+  - Manual review completed: ✓
+  - Usable rate: __%  (Target: 60%+)
+  - Distorted faces filtered: ✓
+  - Text artifacts filtered: ✓
+  - Notes:
+
+### 6.5.3 AI Video Generation (Advanced - Optional)
+- [ ] **Video generation setup (if executing)**
+  - Tool selected: [Runway / Pika / Sora]
+  - `scripts/generate_videos.py` created: ✓
+  - Test video generated: ✓
+  - Notes: Skip this if static/slideshow ads perform well
+- [ ] **Editing workflow established**
+  - CapCut templates created: ✓
+  - Subtitle automation tested: ✓
+  - Music library selected: ✓
+  - Notes:
+
+### 6.5.4 Creative Assembly & Batch Upload
+- [ ] **Assembly system built**
+  - `scripts/assemble_ads.py` created: ✓
+  - Test run: 50 images × 5 headlines × 3 bodies = 750 variants: ✓
+  - Output: `/creative_assets/ai_generated/assembled_batches/batch_[date].json`: ✓
+  - Naming convention verified: ✓
+  - Notes:
+- [ ] **Meta Ads API bulk upload**
+  - `facebook-business` SDK installed: ✓
+  - `scripts/upload_to_meta.py` created: ✓
+  - Dry-run mode tested: ✓
+  - Manual approval process documented: ✓
+  - First batch uploaded successfully: ✓
+  - Number of ad sets created: __
+  - Notes:
+
+### 6.5.5 Automated Kill/Scale Logic
+- [ ] **Performance monitoring system**
+  - `scripts/optimize_campaigns.py` created: ✓
+  - Meta Ads API query working: ✓
+  - Kill rules implemented:
+    - CTR < 1% after 24h: ✓
+    - CPA > payout after 48h: ✓
+    - Creative fatigue (30% CTR decline): ✓
+  - Scale rules implemented:
+    - ROI > 30% → +20% budget: ✓
+    - High CTR/CVR → duplicate ad set: ✓
+  - Notes:
+- [ ] **Budget reallocation automation**
+  - Portfolio logic implemented: ✓
+  - 10% max per ad set enforced: ✓
+  - Daily rebalancing working: ✓
+  - Notes:
+- [ ] **Scheduled execution**
+  - Cloud Scheduler job created: ✓
+  - OR local cron configured: ✓
+  - First automated run successful: [Date & Time]
+  - Notes:
+
+### 6.5.6 AI Winner Remix Loop
+- [ ] **Evolutionary creative system**
+  - `scripts/remix_winners.py` created: ✓
+  - Top 5 performer identification working: ✓
+  - Pattern extraction logic: ✓
+  - GPT-4 variant generation: ✓
+  - Weekly schedule configured: ✓
+  - Notes:
+- [ ] **A/B test framework**
+  - AI vs manual creative tracking: ✓
+  - ROI comparison per $100 spent: ✓
+  - Winner identification: AI / Manual / Equal
+  - Notes:
+- [ ] **First remix cycle complete**
+  - Date executed: [Date]
+  - Winners identified: [List]
+  - New batch generated: __ variants
+  - Notes:
+
+### 6.5.7 Success Metrics & Benchmarks
+- [ ] **Volume metrics tracked**
+  - Creatives generated per week: __ (Target: 100-500)
+  - Usable rate: __% (Target: 60%+)
+  - Time savings: __% vs manual (Target: 80%+)
+- [ ] **Performance metrics tracked**
+  - Winner discovery rate: __ per 100 tested (Target: 2-5)
+  - Time to find winner: __ days (Target: <7 days)
+  - Creative refresh cycle: Weekly / Biweekly / Monthly
+- [ ] **Revenue impact measured**
+  - ROI improvement: __x vs manual (Target: 2-3x)
+  - Daily profit capacity: $__ (Target: $300-$1,000/day)
+  - Notes:
+
+### 6.5.8 Phase 6.5 Completion Checklist
+- [ ] **Phase 6.5 Complete When:**
+  - AI copy generation produces 100+ variants in <1 hour
+  - AI image generation produces 50+ images in <2 hours
+  - Meta Ads API batch upload creates 50+ ad sets successfully
+  - Automated kill/scale script runs daily without errors
+  - First AI-generated ad achieves ROI > 1.5x
+  - Creative refresh cycle runs weekly automatically
+  - Total AI-generated ads launched: __
+  - AI-generated winners found: __
+
+### 6.5.9 Tech Stack Installed
+- [ ] **Dependencies added to requirements.txt:**
+  - `openai==1.12.0` (GPT-4 copy generation): ✓
+  - `replicate==0.22.0` (Midjourney/SDXL): ✓
+  - `facebook-business==19.0` (Meta Ads API): ✓
+  - `pillow==10.2.0` (Image manipulation): ✓
+- [ ] **New scripts created:**
+  - `/scripts/generate_copy.py`: ✓
+  - `/scripts/generate_images.py`: ✓
+  - `/scripts/generate_videos.py`: ✓ (optional)
+  - `/scripts/assemble_ads.py`: ✓
+  - `/scripts/upload_to_meta.py`: ✓
+  - `/scripts/optimize_campaigns.py`: ✓
+  - `/scripts/remix_winners.py`: ✓
+
+### 6.5.10 Cost Tracking
+- [ ] **Monthly AI tooling costs:**
+  - GPT-4 API: $__/month
+  - Midjourney/DALL-E: $__/month
+  - Runway/Pika (if used): $__/month
+  - Total monthly cost: $__ (Target: $50-$100)
+- [ ] **ROI calculation:**
+  - AI tooling cost: $__
+  - Additional daily profit from AI ads: $__
+  - Payback period: __ days
+  - Notes:
+
+**Phase 6.5 Complete:** [ ] AI creative engine operational, scaling profitably
+
+---
+
+**📝 Important Notes on Phase 6.5:**
+- ❌ **Do NOT start Phase 6.5 if Phase 6 is unprofitable** - Fix the business model first
+- ❌ **Do NOT start if testing budget <$500/week** - Need capital to exploit AI creative volume
+- ❌ **Do NOT start if compliance issues exist** - Resolve Meta/affiliate warnings first
+- ✅ **Only execute after 2-3 weeks of proven Phase 6 profitability (ROAS > 1.5x)**
 
 ---
 

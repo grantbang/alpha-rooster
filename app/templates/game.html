@@ -105,13 +105,14 @@
             console.log('Meta Pixel: InitiateCheckout tracked');
         }
 
-        // For now, redirect to a test offer URL (will connect to real affiliate link later)
-        const testOfferUrl = `https://example.com/offer?fbclid=${fbclid}`;
-        console.log('Redirecting to:', testOfferUrl);
+        // MaxBounty Auto Insurance Offer - YourInsurancePath (#29678)
+        // SubID1 (s1) passes Facebook click ID for conversion tracking
+        const offerUrl = `https://afflat3c1.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/?o=29678&c=918277&a=784915&k=EAA49755014524075AD2568514DBE364&l=33293&s1=${fbclid}`;
+        console.log('Redirecting to offer:', offerUrl);
 
         // Small delay to ensure pixel fires
         setTimeout(() => {
-            window.location.href = testOfferUrl;
+            window.location.href = offerUrl;
         }, 300);
     });
 </script>

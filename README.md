@@ -850,6 +850,8 @@ ORDER BY epc DESC
     * Week 4: Test new game variant (scratch-off) with winners
     * Ongoing: Create 2 new ad creatives per week to combat ad fatigue
 
+> **📝 Note on AI Creative Generation:** Phase 2 focuses on **manual creative creation** to validate your offer and funnel. This is the correct approach for MVP testing. Once you have proven winners (ROI > 1.5x after completing Phase 6), you can optionally implement **Phase 6.5: AI Creative Factory** to scale creative testing 10-50x using GPT-4, Midjourney, and automated batch uploading. See Phase 6.5 for details on AI-powered creative generation, remixing, and automation workflows. **Do not attempt AI creative scaling before validating that manual ads convert profitably.**
+
 ### Phase 3: The Game App (Days 5-8)
 
 #### **3.1 Local Development Setup**
@@ -2030,6 +2032,182 @@ By end of Day 7, you should have:
     * Kill game variants with CVR <3%.
     * Kill offers with EPC <$0.20.
     * Scale winners (2x budget on best-performing variant + offer combo).
+
+### Phase 6.5: AI Creative Scaling (Optional - Execute ONLY After Proven ROI)
+
+> **⚠️ TRIGGER CONDITION:** Only execute Phase 6.5 if Phase 6 shows **profitable ROI (ROAS > 1.5x)** after 2-3 weeks of testing.
+> 
+> **Goal:** Scale from 5-10 manual creatives → 100+ AI-generated variants per week to find winners faster and combat creative fatigue.
+>
+> **Why Optional:** Manual creative testing is sufficient for validation. AI creative scaling is a **growth accelerant**, not a requirement for profitability.
+
+#### **6.5.1 AI Copy Generation Pipeline**
+* [ ] **Set up GPT-4 creative generation system:**
+    * Install OpenAI Python SDK: `pip install openai==1.12.0`
+    * Create `/scripts/generate_copy.py`:
+        * Input: Winning ad copy from Phase 6
+        * Output: 50 headline variants + 50 body text variants
+        * Preserve: Hook structure, emotional angle, CTA clarity
+        * Vary: Opening line, curiosity elements, social proof language
+    * Store outputs in `/creative_assets/ai_generated/copy_variants.json`
+* [ ] **Test generated copy quality:**
+    * Manually review top 20 variants
+    * Filter out: Off-brand tone, policy violations, generic language
+    * Acceptance criteria: 70%+ of variants are usable without editing
+
+#### **6.5.2 AI Image Generation Workflow**
+* [ ] **Set up image generation pipeline:**
+    * Choose tool: Midjourney API (via Discord bot) OR DALL-E 3 API OR Replicate (SDXL)
+    * Install dependencies: `pip install replicate==0.22.0` (if using Replicate)
+    * Create `/scripts/generate_images.py`:
+        * Input: Text prompts based on winning ad themes
+        * Examples:
+            * "Excited 35-year-old woman looking at laptop, surprised expression, modern home office, natural lighting, photorealistic"
+            * "Happy family reviewing paperwork together, living room setting, warm tones, candid photo"
+        * Output: 50 image variations (age, gender, setting, emotion, device combinations)
+    * Organize: `/creative_assets/ai_generated/images/batch_[date]/`
+* [ ] **Quality control:**
+    * Filter out: Distorted faces, text artifacts, off-brand aesthetics
+    * Acceptance criteria: 60%+ of images are ad-ready
+
+#### **6.5.3 AI Video Generation (Advanced - Optional)**
+* [ ] **Set up video creative pipeline:**
+    * Tool options:
+        * **Runway Gen-2:** Fast UGC-style clips (3-5 seconds)
+        * **Pika Labs:** Motion graphics, text animations
+        * **Sora (when available):** Premium hero creatives (10-20 seconds)
+    * Create `/scripts/generate_videos.py`:
+        * Input: Winning static ads or image variants
+        * Output: Motion versions (zoom, pan, ken burns effect, or AI-generated scenes)
+    * Use cases:
+        * Convert static images → slideshow videos with captions
+        * Generate UGC-style "user reaction" videos
+        * Create spin wheel animation variants
+* [ ] **Editing workflow:**
+    * Use CapCut or Descript for: Subtitles, transitions, music, aspect ratio conversion
+    * Template library: 5 proven video formats (hook → problem → solution → CTA)
+
+#### **6.5.4 Creative Assembly & Batch Upload**
+* [ ] **Build creative remixing system:**
+    * Create `/scripts/assemble_ads.py`:
+        * Combines: 50 images × 5 headlines × 3 body texts = **750 ad variants**
+        * Generates: Meta Ads API-compatible JSON payload
+        * Naming convention: `{offer_id}_{image_id}_{headline_id}_{date}.json`
+    * Output: `/creative_assets/ai_generated/assembled_batches/batch_[date].json`
+* [ ] **Meta Ads API bulk upload:**
+    * Install: `pip install facebook-business==19.0.0`
+    * Create `/scripts/upload_to_meta.py`:
+        * Reads: Assembled ad JSON files
+        * Creates: Separate ad sets for each variant
+        * Budget allocation: $2-$5/day per ad set (small test budgets)
+        * Targeting: Clone settings from winning Phase 6 campaigns
+    * Safety checks:
+        * Max 100 ads per batch (prevent account flags)
+        * Require manual approval before execution
+        * Dry-run mode to preview without uploading
+
+#### **6.5.5 Automated Kill/Scale Logic**
+* [ ] **Build performance monitoring system:**
+    * Create `/scripts/optimize_campaigns.py`:
+        * Runs: Daily via Cloud Scheduler or local cron
+        * Queries: Meta Ads API for campaign performance metrics
+        * Decision rules:
+            * **Kill:** CTR < 1% after 24 hours → Pause ad
+            * **Kill:** CPA > payout after 48 hours → Pause ad
+            * **Kill:** Creative fatigue (CTR declining >30% over 7 days) → Pause ad
+            * **Scale:** ROI > 30% → Increase budget by 20%/day
+            * **Scale:** CTR > 3% and CVR > 5% → Duplicate ad set to new audiences
+* [ ] **Budget reallocation automation:**
+    * Implement portfolio logic:
+        * Max 10% of total budget per single ad set (prevent over-concentration)
+        * Shift budget from losers → winners daily
+        * Cap max spend per creative at 3x initial test budget
+
+#### **6.5.6 AI Winner Remix Loop**
+* [ ] **Build evolutionary creative system:**
+    * Create `/scripts/remix_winners.py`:
+        * Input: Top 5 performing ads from past 7 days (by ROI)
+        * Process:
+            1. Extract: Hook pattern, emotional angle, visual theme, CTA structure
+            2. Feed to GPT-4: "Generate 50 improved variants preserving these elements"
+            3. Generate: New image/video variations matching winning themes
+            4. Assemble: New batch of 100-200 creative variants
+        * Output: Weekly creative refresh batch
+    * Schedule: Run every Sunday night, deploy Monday morning
+* [ ] **A/B test framework:**
+    * Compare: AI-generated variants vs. manual control creatives
+    * Track: Which generation method produces higher ROI per $100 spent
+    * Iterate: Double down on winning generation strategies
+
+#### **6.5.7 Success Metrics & Benchmarks**
+* [ ] **Track AI creative performance:**
+    * **Volume metrics:**
+        * Creatives generated per week: Target 100-500
+        * Usable rate: Target 60%+ without manual editing
+        * Time savings: Target 80% reduction vs. manual creation
+    * **Performance metrics:**
+        * Winner discovery rate: Target 2-5 profitable ads per 100 tested
+        * Time to find winner: Target <7 days (vs. 21+ days manual)
+        * Creative refresh cycle: Target weekly (vs. monthly manual)
+    * **Revenue impact:**
+        * ROI improvement: Target 2-3x increase in profitable ad discovery
+        * Scale capacity: Target $300-$1,000/day profit (vs. $100-$300 manual)
+
+#### **6.5.8 Tech Stack Summary**
+
+```python
+# requirements.txt additions for Phase 6.5
+openai==1.12.0           # GPT-4 for copy generation
+replicate==0.22.0        # Midjourney/SDXL API (or DALL-E alternative)
+facebook-business==19.0  # Meta Ads API for bulk uploads
+pillow==10.2.0           # Image manipulation and optimization
+```
+
+**New project files:**
+```
+/scripts
+  generate_copy.py        # AI headline + body text generation
+  generate_images.py      # AI image generation via Midjourney/DALL-E
+  generate_videos.py      # AI video generation (optional)
+  assemble_ads.py         # Combine media + copy into ad variants
+  upload_to_meta.py       # Bulk upload to Meta Ads API
+  optimize_campaigns.py   # Daily kill/scale automation
+  remix_winners.py        # Weekly evolutionary creative refresh
+
+/creative_assets/ai_generated
+  /copy_variants          # JSON files with AI-generated text
+  /images                 # AI-generated image assets
+  /videos                 # AI-generated video assets (optional)
+  /assembled_batches      # Ready-to-upload ad JSON files
+```
+
+#### **6.5.9 Cost Estimate**
+* **AI API costs:**
+    * GPT-4: ~$5-10 per 1,000 text variants
+    * Midjourney: $30/month (unlimited generations)
+    * DALL-E 3: ~$0.04 per image (~$2 per 50 images)
+    * Runway/Pika: ~$12-30/month (basic tier)
+* **Total Phase 6.5 monthly cost:** $50-$100 in AI tooling
+* **ROI multiplier:** If AI finds 2-3 additional winning ads worth $50-$200/day profit each, this pays for itself in 1-2 days.
+
+#### **6.5.10 When NOT to Execute Phase 6.5**
+* ❌ **If Phase 6 is not profitable:** Fix offer selection, targeting, or funnel first—more creatives won't fix a broken business model.
+* ❌ **If manual testing budget is <$500/week:** AI creative volume requires testing capital to exploit.
+* ❌ **If compliance issues exist:** Meta account bans, affiliate network warnings, legal concerns must be resolved first.
+* ❌ **If time is limited:** Phase 6.5 requires 1-2 weeks to build and tune—don't rush it.
+
+#### **6.5.11 Phase 6.5 Completion Checklist**
+* [ ] **Phase 6.5 Complete When:**
+    * AI copy generation produces 100+ variants in <1 hour
+    * AI image generation produces 50+ images in <2 hours
+    * Meta Ads API batch upload successfully creates 50+ ad sets
+    * Automated kill/scale script runs daily without errors
+    * First AI-generated ad achieves ROI > 1.5x (validates the system)
+    * Creative refresh cycle runs weekly automatically
+
+---
+
+**📝 Note on Phase 6.5:** This is a **growth accelerant for proven systems**, not a requirement for initial profitability. Complete Phases 1-6 first, validate that manual ads convert profitably, THEN build AI creative scaling. Attempting to automate before validation leads to "garbage in, garbage out" at scale.
 
 ---
 
