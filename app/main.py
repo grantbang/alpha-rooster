@@ -1,16 +1,20 @@
 """
 Alpha Rooster - Main FastAPI Application
-Phase 3.1: Basic Setup
+Phase 3.5: BigQuery Integration
 """
 
 import os
 import logging
+import uuid
 from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from urllib.parse import urlencode
+
+# Import BigQuery client
+from app.bigquery_client import insert_user_event, validate_connection
 
 # Load environment variables
 load_dotenv()
@@ -28,6 +32,19 @@ app = FastAPI(
     description="Social-to-CPA Game Engine",
     version="10.0"
 )
+
+# Startup event - validate BigQuery connection
+@app.on_event("startup")
+async def startup_event():
+    """Validate BigQuery connection on app startup."""
+    logger.info("🚀 Starting Alpha Rooster application...")
+    try:
+        if validate_connection():
+            logger.info("✅ BigQuery connection validated")
+        else:
+            logger.warning("⚠️  BigQuery connection validation failed")
+    except Exception as e:
+        logger.error(f"❌ BigQuery connection error: {e}")
 
 # Mount static files (CSS, JS, images)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -102,8 +119,24 @@ async def health_check():
 async def get_qualify(request: Request, fbclid: str | None = None):
     """
     Render pre-qualifier form. Preserves fbclid if provided.
+    Logs page_view event to BigQuery.
     """
     logger.info(f"/qualify GET accessed fbclid={fbclid}")
+    
+    # Log page view to BigQuery
+    try:
+        event_id = str(uuid.uuid4())
+        insert_user_event(
+            event_id=event_id,
+            event_type="page_view",
+            fbclid=fbclid,
+            variant_id="qualify_v1",
+            user_agent=request.headers.get("user-agent")
+        )
+    except Exception as e:
+        # Don't block page load if BigQuery fails
+        logger.error(f"BigQuery insert failed for page_view: {e}")
+    
     return templates.TemplateResponse("qualify.html", {
         "request": request,
         "fbclid": fbclid,
@@ -131,6 +164,20 @@ async def post_qualify(
         HTTPException: 400 on validation error
     """
     logger.info(f"/qualify POST age_range={age_range} state={state} fbclid={fbclid}")
+
+    # Log qualify_submit event to BigQuery
+    try:
+        event_id = str(uuid.uuid4())
+        insert_user_event(
+            event_id=event_id,
+            event_type="qualify_submit",
+            fbclid=fbclid,
+            variant_id="qualify_v1",
+            user_agent=request.headers.get("user-agent")
+        )
+    except Exception as e:
+        # Don't block form processing if BigQuery fails
+        logger.error(f"BigQuery insert failed for qualify_submit: {e}")
 
     valid_states = {
         "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"
@@ -174,11 +221,27 @@ async def post_qualify(
 async def get_game(request: Request, fbclid: str | None = None):
     """
     Render the spin wheel game. User plays to win their reward tier.
+    Logs game_load event to BigQuery.
     
     Args:
         fbclid: Optional Facebook click id (preserved from /qualify)
     """
     logger.info(f"/game GET accessed fbclid={fbclid}")
+    
+    # Log game page load to BigQuery
+    try:
+        event_id = str(uuid.uuid4())
+        insert_user_event(
+            event_id=event_id,
+            event_type="game_load",
+            fbclid=fbclid,
+            variant_id="wheel_v1",
+            user_agent=request.headers.get("user-agent")
+        )
+    except Exception as e:
+        # Don't block page load if BigQuery fails
+        logger.error(f"BigQuery insert failed for game_load: {e}")
+    
     return templates.TemplateResponse("game.html", {
         "request": request,
         "fbclid": fbclid or "demo",
