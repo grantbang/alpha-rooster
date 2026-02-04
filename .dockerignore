@@ -1,0 +1,41 @@
+# Alpha Rooster - Docker Ignore
+# Exclude files that shouldn't be in the Docker image
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Environment & Secrets
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Documentation
+*.md
+docs/
+tests/
+.vscode/
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
