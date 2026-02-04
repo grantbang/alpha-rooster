@@ -25,14 +25,15 @@
 - ❌ Game variants not started
 - ❌ A/B testing framework not started
 
-**Phase 3: Game App** - 63% Complete (19/30 tasks)
+**Phase 3: Game App** - 83% Complete (25/30 tasks)
 - ✅ Local development complete (Phase 3.1)
 - ✅ Pre-qualifier complete (Phase 3.2)
 - ✅ Game engine complete (Phase 3.3)
 - ✅ Meta Pixel tracking complete (Phase 3.4)
 - ✅ Real MaxBounty offer integrated and tested
 - ✅ End-to-end funnel working on localhost
-- ⏳ BigQuery logging starting now (Phase 3.5)
+- ✅ BigQuery tracking complete (Phase 3.5) - NEW!
+- ✅ Facebook attribution working end-to-end
 - ❌ Deployment not started (Phase 3.6)
 
 **Phase 4-6** - 0% Complete
@@ -341,33 +342,44 @@
   - Notes: ✅ COMPLETED January 27, 2026 - Ready for live testing with real Pixel ID
 
 ### 3.5 BigQuery Integration
-- [ ] **3.5.1** GCP project created
-  - Project ID: rooster-social-game
+- [x] **3.5.1** GCP project created
+  - Project ID: rooster-486417
+  - Project Number: 854992820579
   - BigQuery API enabled: ✓
-  - Notes: Starting now - February 4, 2026
-- [ ] **3.5.2** BigQuery dataset and tables created
-  - Dataset: rooster_data
-  - Table: game_events (event_id, fbclid, variant_id, timestamp, etc.)
-  - Table: conversion_signals (event_id, payout, status, conversion_time)
-  - Schema verified: ✓
-- [ ] **3.5.3** `app/bigquery_client.py` created
-  - Connection works: ✓
-  - insert_event() function works: ✓
-  - insert_conversion() function works: ✓
-  - Error handling complete: ✓
-- [ ] **3.5.4** Logging added to routes
-  - /qualify logs form submission: ✓
-  - /game logs page view: ✓
-  - Claim button logs interaction: ✓
+  - Notes: ✅ COMPLETED February 4, 2026
+- [x] **3.5.2** BigQuery dataset and tables created
+  - Dataset: rooster_data (US region)
+  - Table: user_events (event_id, fbclid, timestamp, event_type, variant_id, user_agent)
+  - Table: conversion_signals (event_id, fbclid, payout, offer_id, conversion_time, raw_postback)
+  - Both tables partitioned by date for performance
+  - Column descriptions added
+  - Schema file: schema.sql
+  - Notes: ✅ COMPLETED February 4, 2026
+- [x] **3.5.3** `app/bigquery_client.py` created
+  - BigQuery client initialized: ✓
+  - insert_user_event() function works: ✓
+  - insert_conversion_signal() function works: ✓
+  - Error handling with retry logic: ✓
+  - Startup validation: ✓
+  - Notes: ✅ COMPLETED February 4, 2026
+- [x] **3.5.4** Logging added to routes
+  - /qualify GET logs page_view: ✓
+  - /qualify POST logs qualify_submit: ✓
+  - /game logs game_load: ✓
   - All events include fbclid: ✓
-- [ ] **3.5.5** Local testing complete
+  - Non-blocking error handling: ✓
+  - Notes: ✅ COMPLETED February 4, 2026
+- [x] **3.5.5** Local testing complete
   - Events appear in BigQuery console: ✓
-  - Query verification:
+  - fbclid attribution working end-to-end: ✓
+  - Query verification successful:
     ```sql
-    SELECT * FROM rooster_data.game_events 
-    ORDER BY timestamp DESC LIMIT 5
+    SELECT event_id, event_type, fbclid, variant_id, timestamp 
+    FROM rooster-486417.rooster_data.user_events 
+    ORDER BY timestamp DESC LIMIT 10
     ```
-  - Screenshot: `tests/bigquery_first_events.png`
+  - Test results: 3 events logged with same fbclid preserved through funnel
+  - Notes: ✅ COMPLETED February 4, 2026 - Phase 3.5 COMPLETE!
 
 ### 3.6 Deployment
 - [ ] **3.6.1** Dockerfile created
