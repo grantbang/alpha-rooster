@@ -1,0 +1,70 @@
+An account with the credentials you provided cannot be found.
+0.00
+Taylor Fleming | 
+Dashboard
+Reports
+Browse
+Search
+Referral Program
+MaxMoney
+Resources
+MaxBounty+
+FAQ
+Campaign Information
+Bookmark
+YourInsurancePath - Auto Insurance - CPL (US) ID: 29678
+Insurance - Auto
+Allowed Traffic Types	ContextualDisplaySearchSocialNativeMobile AdsEmailIncentiveBrand Bidding
+Your Status	Approved
+Your Daily Cap	25 actions per day.
+Countries Allowed	
+United States
+
+Devices	All device operating systems allowed
+Payment Delay	15 days (from end of month)
+Rates
+Description	Type	CPA Rate
+Lead Submit	Fixed	$6.75 per lead
+Landing Pages
+Sample	Preview 
+Home Page (Default)	Image Preview 
+Creatives
+Details
+Network EPC	$0.34
+Expiry Date	No expiry
+Tracking Type	Server-to-server tracking
+Campaign Description
+
+YourInsurancePath helps drivers compare personalized auto insurance quotes from top providers. By answering a few simple questions, users can explore competitive rates and coverage options that fit their needs.
+
+Converts on lead submit.
+
+Targeting: US consumers seeking new or lower auto insurance rates.
+
+Restrictions: No incentivized traffic, misleading claims, or unapproved creatives. Must comply with state-level insurance advertising guidelines and platform policies.
+
+Tracking Link Builder
+Build tracking link
+Your tracking link
+1
+What type of traffic will you be sending?
+Display
+Social
+Native
+Mobile Ads
+Email
+2
+Select a creative
+Raw link
+Search
+Contextual
+Pixels / Postbacks
+Select a postback type
+URL (any campaign tracking type)
+Server-server URL (any campaign tracking type)
+
+
+See available macros
+
+Save Postback
+MaxBounty Inc. [1]

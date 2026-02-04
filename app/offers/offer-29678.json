@@ -1,0 +1,29 @@
+{
+  "id": "29678",
+  "name": "YourInsurancePath - Auto Insurance",
+  "payout": 6.75,
+  "description": "YourInsurancePath helps drivers compare personalized auto insurance quotes from top providers. By answering a few simple questions, users can explore competitive rates and coverage options that fit their needs.",
+  "countries": [
+    "United States"
+  ],
+  "restrictions": [
+    "No incentivized traffic, misleading claims, or unapproved creatives",
+    "Must comply with state-level insurance advertising guidelines and platform policies"
+  ],
+  "qualifying_actions": "lead submit",
+  "allowed_traffic": [
+    "Contextual",
+    "Display",
+    "Search",
+    "Social",
+    "Native",
+    "Mobile Ads",
+    "Email",
+    "Incentive",
+    "Brand Bidding"
+  ],
+  "daily_cap": 25,
+  "epc": 0.34,
+  "category": "Insurance - CPL",
+  "raw_text": "An account with the credentials you provided cannot be found.\n0.00\nTaylor Fleming | \nDashboard\nReports\nBrowse\nSearch\nReferral Program\nMaxMoney\nResources\nMaxBounty+\nFAQ\nCampaign Information\nBookmark\nYourInsurancePath - Auto Insurance - CPL (US) ID: 29678\nInsurance - Auto\nAllowed Traffic Types\tContextualDisplaySearchSocialNativeMobile AdsEmailIncentiveBrand Bidding\nYour Status\tApproved\nYour Daily Cap\t25 actions per day.\nCountries Allowed\t\nUnited States\n\nDevices\tAll device operating systems allowed\nPayment Delay\t15 days (from end of month)\nRates\nDescription\tType\tCPA Rate\nLead Submit\tFixed\t$6.75 per lead\nLanding Pages\nSample\tPreview \nHome Page (Default)\tImage Preview \nCreatives\nDetails\nNetwork EPC\t$0.34\nExpiry Date\tNo expiry\nTracking Type\tServer-to-server tracking\nCampaign Description\n\nYourInsurancePath helps drivers compare personalized auto insurance quotes from top providers. By answering a few simple questions, users can explore competitive rates and coverage options that fit their needs.\n\nConverts on lead submit.\n\nTargeting: US consumers seeking new or lower auto insurance rates.\n\nRestrictions: No incentivized traffic, misleading claims, or unapproved creatives. Must comply with state-level insurance advertising guidelines and platform policies.\n\nTracking Link Builder\nBuild tracking link\nYour tracking link\n1\nWhat type of traffic will you be sending?\nDisplay\nSocial\nNative\nMobile Ads\nEmail\n2\nSelect a creative\nRaw link\nSearch\nContextual\nPixels / Postbacks\nSelect a postback type\nURL (any campaign tracking type)\nServer-server URL (any campaign tracking type)\n\n\nSee available macros\n\nSave Postback\nMaxBounty Inc. [1]\n"
+}
