@@ -3,51 +3,73 @@
 > **Instructions:** Check off tasks as you complete them. Add verification proof (screenshot filename, query result, etc.) in notes.
 
 **Started:** January 22, 2026  
-**Current Phase:** Phase 3.5 (BigQuery Integration - Starting Now)  
-**Last Updated:** February 4, 2026
+**Current Phase:** Phase 3.6 (Cloud Run Deployment - COMPLETE), Phase 4.1 (Postback Endpoint) NEXT  
+**Strategy Framework:** Mechanical Arbitrage (See FACEBOOK_ADS_STRATEGY.md)  
+**Last Updated:** February 5, 2026
 
 ---
 
 ## 📊 Overall Progress Summary
 
-**Phase 1: Foundation** - 31% Complete (5/16 tasks)
+**Phase 1: Foundation** - 40% Complete (9/22 tasks)
 - ✅ Domain & email setup complete
 - ✅ Coming soon page live at playtosave.net
 - ✅ MaxBounty account APPROVED (ID: 784915)
 - ✅ First CPA offer approved (Auto Insurance #29678, $6.75/lead)
 - ✅ Tracking link configured with SubID1
-- ❌ GCP setup not started (starting Phase 3.5)
-- ❌ Meta Business Manager not started
-- ❌ Legal docs not started
+- ✅ GCP project created and configured (rooster-486417)
+- ❌ Meta Business Manager not started (Phase 1.3 - 8 tasks)
+- ❌ Legal docs not started (Phase 1.4)
+- ❌ Domain connection pending (playtosave.net → Cloud Run)
 
 **Phase 2: Creative Arsenal** - 0% Complete (0/13 tasks)
-- ❌ Ad creatives not started (Reference: CONTENT-CREATION-GUIDE.md)
-- ❌ Game variants not started
-- ❌ A/B testing framework not started
+- ⚠️ **UPDATED:** Now follows 3:2:2 Dynamic Creative framework
+- ❌ 3 angle images/videos not created (Logic, Fear, Curiosity)
+- ❌ 2 primary text variants not written
+- ❌ 2 headline variants not written
+- 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md Sections 3.1-3.4
 
-**Phase 3: Game App** - 83% Complete (25/30 tasks)
+**Phase 3: Game App** - 90% Complete (27/30 tasks)
 - ✅ Local development complete (Phase 3.1)
 - ✅ Pre-qualifier complete (Phase 3.2)
 - ✅ Game engine complete (Phase 3.3)
 - ✅ Meta Pixel tracking complete (Phase 3.4)
 - ✅ Real MaxBounty offer integrated and tested
 - ✅ End-to-end funnel working on localhost
-- ✅ BigQuery tracking complete (Phase 3.5) - NEW!
+- ✅ BigQuery tracking complete (Phase 3.5)
 - ✅ Facebook attribution working end-to-end
-- ❌ Deployment not started (Phase 3.6)
+- ✅ Cloud Run deployment complete (Phase 3.6)
+- ✅ Production funnel verified working
+- ❌ Mobile testing not complete (Phase 3.7)
+- ❌ Custom domain (playtosave.net) not connected to Cloud Run
 
-**Phase 4-6** - 0% Complete
-- Phases 4, 5, 6 pending Phase 3 completion
-- Phase 6.5 (AI Creative Scaling) is OPTIONAL - Only execute after Phase 6 shows ROAS > 1.5x
+**Phase 4: Conversion Tracking** - 0% Complete (0/8 tasks)
+- ❌ Postback endpoint not built (CRITICAL - blocks earning money)
+- ❌ CAPI integration not built (blocks Facebook optimization)
+- 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md Section 1.1 & 1.4
 
-**Next Steps:**
-1. ✅ DONE: MaxBounty approved, first offer approved and tested
-2. ✅ DONE: Phase 3.1-3.4 complete (local prototype working)
-3. **NOW**: Build Phase 3.5 (BigQuery Integration)
-4. **NEXT**: Build Phase 3.6 (Deploy to Cloud Run)
-5. **THEN**: Setup Meta Business Manager (Phase 1.3)
-6. **THEN**: Create first ad creatives (Phase 2.1)
-7. **FINALLY**: Launch first test campaign (Phase 6.1)
+**Phase 5-6** - 0% Complete
+- ⚠️ **BLOCKED:** Cannot launch ads until Phase 1.3 (Account Seasoning) complete
+- 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md for complete launch strategy
+
+**Next Steps (Priority Order):**
+1. 🌐 **BLOCKER:** Connect playtosave.net domain to Cloud Run (30 min)
+2. 📡 **BLOCKER:** Build postback endpoint (Phase 4.1, 1 hour)
+3. 🔗 **BLOCKER:** Build CAPI integration (Phase 4.2, 1 hour)
+4. 📱 **TESTING:** Mobile testing (Phase 3.7, 15 min)
+5. 📄 **COMPLIANCE:** Create Privacy/Terms pages (Phase 1.4, 1 hour)
+6. 🎯 **META SETUP:** Complete Phase 1.3 (Meta Business Manager, 3 hours)
+   - Domain verification
+   - Business Page creation
+   - 3 posts published
+   - $15 warming campaign (3 days)
+7. 🎨 **CREATIVE:** Build 3:2:2 ad matrix (Phase 2, 4 hours)
+8. 🚀 **LAUNCH:** First campaign (Phase 6, follows FACEBOOK_ADS_STRATEGY.md)
+
+**Strategic Framework:**
+- 📖 **Master Guide:** FACEBOOK_ADS_STRATEGY.md (complete mechanical blueprint)
+- 🎯 **Operating Rules:** Hold (48h) → Kill ($20.25/0 leads) → Scale (20% every 48h)
+- 📊 **Success Criteria:** ROAS ≥ 1.5x (Phase 1), ≥ 2.0x (Phase 2), ≥ 3.0x (Phase 3)
 
 ---
 
@@ -126,23 +148,49 @@
 
 ### 1.3 Meta Business Manager Setup
 - [ ] **1.3.1** Business Manager account created
-  - Business name: 
-  - Business email: info@[yourdomain].com
+  - Business name: PlayToSave
+  - Business email: info@playtosave.net
   - URL: https://business.facebook.com/
   - Notes:
-- [ ] **1.3.2** Payment method added
+- [ ] **1.3.2** Domain verification
+  - Domain added: playtosave.net
+  - DNS TXT record added to Namecheap
+  - Verification status: Pending (24-48 hours)
+  - Notes:
+- [ ] **1.3.3** Payment method added
   - Card added: ✓
-  - Spending limit set: $500/month
-- [ ] **1.3.3** Meta Pixel created
+  - Spending limit set: $150/day (safety limit)
+  - Budget alert: $100/day warning
+  - Notes:
+- [ ] **1.3.4** Meta Pixel created
   - Pixel ID: 
-  - Pixel name: RoosterGamePixel
-- [ ] **1.3.4** CAPI setup complete
+  - Pixel name: PlayToSavePixel
+  - Install verification: Test Events shows events ✓
+- [ ] **1.3.5** CAPI setup complete
   - Access token generated: ✓
+  - Event deduplication implemented (event_id matching): ✓
   - Test event sent successfully: [Timestamp]
-  - Screenshot: `tests/meta_test_event.png`
-- [ ] **1.3.5** Custom conversions created
-  - "Game Engagement" conversion: ✓
-  - "Offer Click" conversion: ✓
+  - Event Match Quality score: > 80% ✓
+  - Screenshot: `tests/meta_capi_working.png`
+- [ ] **1.3.6** Facebook Business Page created
+  - Page name: PlayToSave
+  - Category: Financial Service
+  - Profile picture uploaded (400x400): ✓
+  - Cover photo uploaded (820x312): ✓
+  - Notes:
+- [ ] **1.3.7** Page content published (warming phase)
+  - Post 1 (Educational tip): ✓
+  - Post 2 (Engagement question): ✓
+  - Post 3 (Helpful fact): ✓
+  - Notes: See FACEBOOK_ADS_STRATEGY.md Section 2.1 for templates
+- [ ] **1.3.8** Account warming campaign complete
+  - Campaign type: "Page Likes" / "Engagement"
+  - Daily budget: $5/day
+  - Duration: 3 days
+  - Total spend: $15 ✓
+  - Result: 50-200 page likes
+  - No policy violations: ✓
+  - Notes: CRITICAL - Do this BEFORE launching real campaigns
 
 ### 1.4 Legal Foundation
 - [ ] **1.4.1** Privacy Policy created
@@ -180,48 +228,72 @@
 
 ## 🎨 Phase 2: Creative Arsenal (Days 2-4)
 
-### 2.1 Ad Creative Production
-- [ ] **2.1.1** Ad Set A created (5 curiosity-driven ads)
-  - A1: Spin wheel image (1080x1080) - Use Canva template
-  - A2: Spin wheel video (15 sec) - Use CapCut
-  - A3: Mystery box carousel - Use Canva
-  - A4: UGC-style selfie video - iPhone screen recording
-  - A5: High-production animation - Optional/Week 2
-  - Folder: `creative_assets/ad_set_a/`
-  - Notes: Reference CONTENT-CREATION-GUIDE.md for step-by-step
-- [ ] **2.1.2** Ad Set B created (3 benefit-focused ads)
-  - B1: Social proof ad (testimonial style)
-  - B2: Urgency ad (limited spots)
-  - B3: Direct benefit ad (savings calculator)
-  - Folder: `creative_assets/ad_set_b/`
-- [ ] **2.1.3** Asset organization complete
-  - Naming convention followed: ✓
-  - Thumbnails for tracking: ✓
-- [ ] **2.1.4** Ad copy templates created
-  - Primary text variants: 5 versions (see DECISION-MAKING-GUIDE.md)
-  - Headlines: 5 versions
-  - Descriptions: 3 versions
-  - Location: Google Doc or creative_assets/copy.txt
-- [ ] **2.1.5** Compliance check passed
-  - No guaranteed money claims: ✓
-  - No fake urgency: ✓
-  - Matches landing page: ✓
+**STATUS:** Follows the 3:2:2 Dynamic Creative framework from FACEBOOK_ADS_STRATEGY.md
 
-### 2.2 Game Variants
-- [ ] **2.2.1** Spin wheel built
-  - Visual design complete: ✓
-  - JavaScript working: ✓
-  - Mobile tested: ✓
-- [ ] **2.2.2** Scratch-off built
-  - [Will build in Week 2]
-- [ ] **2.2.3** Prize box built
-  - [Will build in Week 3]
-- [ ] **2.2.4** Variant tracking logic implemented
-  - `variant_id` naming convention: ✓
+### 2.1 The 3 Angles (Creative Strategy)
+- [ ] **2.1.1** Angle 1 - Logic (Rational Savings)
+  - Image/video created: 1080x1080px
+  - Headline: "Compare 10+ Insurance Providers in Under 2 Minutes"
+  - Body copy: Long-form (200 words) template written
+  - Color scheme: Blue/green (trust, stability)
+  - Tool used: Canva or Midjourney
+  - File: `creative_assets/batch_001/logic_image.png`
+  - Notes: See FACEBOOK_ADS_STRATEGY.md Section 3.1
+  
+- [ ] **2.1.2** Angle 2 - Fear/Pain (Rising Costs)
+  - Image/video created: 1080x1080px
+  - Headline: "Why Did My Insurance Rate Just Go Up?"
+  - Body copy: Long-form template written
+  - Color scheme: Red/orange (urgency, alert)
+  - Tool used: Canva or Midjourney
+  - File: `creative_assets/batch_001/fear_image.png`
+  
+- [ ] **2.1.3** Angle 3 - Curiosity (Weird Trick)
+  - Video created: 15-second screen recording of wheel game
+  - Headline: "This 2-Minute Trick Could Save You $500/Year"
+  - Body copy: Short-form (50 words) template written
+  - Color scheme: Purple/yellow (intrigue, energy)
+  - Tool used: OBS Studio + CapCut
+  - File: `creative_assets/batch_001/curiosity_video.mp4`
 
-### 2.3 A/B Testing Framework
-- [ ] **2.3.1** Tracking spreadsheet created
-  - Columns: variant_id, clicks, plays, conversions, CVR, EPC
+### 2.2 The 3:2:2 Matrix Setup
+- [ ] **2.2.1** Primary text variants created
+  - Variant 1: Long-form story (200 words) ✓
+  - Variant 2: Short-form hook (50 words) ✓
+  - File: `creative_assets/batch_001/primary_text.txt`
+  - Notes: Templates in FACEBOOK_ADS_STRATEGY.md Section 3.4
+  
+- [ ] **2.2.2** Headline variants created
+  - Variant 1: Benefit-focused ("Save $500/Year") ✓
+  - Variant 2: Question-focused ("Are You Overpaying?") ✓
+  - File: `creative_assets/batch_001/headlines.txt`
+  
+- [ ] **2.2.3** Dynamic Creative math verified
+  - 3 images/videos × 2 texts × 2 headlines = 12 combinations ✓
+  - All assets uploaded to Facebook Ads Manager ✓
+  - Dynamic Creative toggle ON in ad settings ✓
+
+### 2.3 Asset Organization
+- [ ] **2.3.1** Creative folder structure
+  - Folder created: `creative_assets/batch_001_feb_2026/`
+  - Files organized:
+    - logic_image.png
+    - fear_image.png
+    - curiosity_video.mp4
+    - primary_text_long.txt
+    - primary_text_short.txt
+    - headlines.txt
+    - performance_log.xlsx
+  - Naming convention followed: `[angle]_[format]_[date]` ✓
+  
+- [ ] **2.3.2** Compliance check passed
+  - No "guaranteed savings" claims: ✓
+  - No fake urgency or scarcity: ✓
+  - Clear affiliate disclosure included: ✓
+  - No before/after imagery without disclaimers: ✓
+  - Reviewed Meta Financial Services policy: ✓
+
+### 2.4 Game Variants (Future - Week 2+)
   - Location: [Google Sheets URL or filename]
 - [ ] **2.3.2** Test matrix planned
   - Week 1 plan documented: ✓
@@ -794,3 +866,39 @@ Based on Week 1 results:
 ---
 
 **Last Updated:** [Date]
+
+---
+
+## 📚 Strategic Reference Documents
+
+### Primary Strategy Framework
+- **FACEBOOK_ADS_STRATEGY.md** - Complete mechanical arbitrage blueprint
+  - Infrastructure setup (CAPI, deduplication, postback)
+  - Account seasoning (warming campaign, page setup)
+  - Creative framework (3:2:2 Dynamic Creative matrix)
+  - Campaign launch configuration
+  - Operating rules (Hold, Kill, Scale)
+  - Performance benchmarks and risk management
+
+### Supporting Documentation
+- **gemini.md** - Original Gemini strategy (source material)
+- **CONTENT-CREATION-GUIDE.md** - Creative production tutorials
+- **DECISION-MAKING-GUIDE.md** - Framework for making strategic decisions
+- **FULL-LIFECYCLE-WALKTHROUGH.md** - Complete user journey documentation
+
+### Key Operating Rules (From FACEBOOK_ADS_STRATEGY.md)
+1. **Hold Rule:** First 48 hours → Do nothing, let algorithm learn
+2. **Kill Rule:** Ad spend > $20.25 (3× payout) with 0 conversions → Pause
+3. **Scale Rule:** ROAS ≥ 1.5x → Increase budget by 20% every 48 hours
+4. **Refresh Rule:** Rotate 3 new creative variants weekly to combat ad fatigue
+
+### Success Metrics Checklist
+- [ ] **Phase 1 Goal:** ROAS ≥ 1.5x (first profitable day)
+- [ ] **Phase 2 Goal:** ROAS ≥ 2.0x (consistent profitability)
+- [ ] **Phase 3 Goal:** ROAS ≥ 3.0x (scale to $200+/day)
+- [ ] **Ultimate Goal:** $20,000/month revenue (2,963 leads/month across 5-10 offers)
+
+---
+
+**End of Phase Tracker**  
+**For complete launch strategy, see: FACEBOOK_ADS_STRATEGY.md**

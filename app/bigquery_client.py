@@ -85,22 +85,18 @@ def insert_user_event(
         raise
 
 
-def insert_conversion_signal(
-    event_id: str,
-    fbclid: Optional[str] = None,
-    payout: Optional[float] = None,
-    offer_id: Optional[str] = None,
-    raw_postback: Optional[str] = None
-) -> bool:
+def insert_conversion_signal(conversion_data: dict) -> bool:
     """
     Insert an affiliate conversion signal into BigQuery.
     
     Args:
-        event_id: Unique conversion identifier
-        fbclid: Facebook Click ID from postback (subId1)
-        payout: Revenue amount in USD
-        offer_id: Affiliate offer identifier (e.g., MaxBounty offer number)
-        raw_postback: Full postback URL/payload for debugging
+        conversion_data: Dictionary with conversion details:
+            - event_id: Unique conversion identifier (from subId1)
+            - payout: Revenue amount in USD
+            - status: Conversion status ("approved", "pending", "rejected")
+            - conversion_time: ISO format timestamp
+            - affiliate_network: Network name ("maxbounty", etc.)
+            - offer_id: Affiliate offer identifier
     
     Returns:
         bool: True if insert successful
@@ -110,16 +106,10 @@ def insert_conversion_signal(
     """
     table_id = f"{project_id}.{dataset_id}.conversion_signals"
     
-    row = {
-        "event_id": event_id,
-        "fbclid": fbclid,
-        "payout": payout,
-        "offer_id": offer_id,
-        "conversion_time": datetime.utcnow().isoformat(),
-        "raw_postback": raw_postback
-    }
+    # Use provided data directly (already formatted in main.py)
+    row = conversion_data
     
-    logger.info(f"Inserting conversion_signal: event_id={event_id} | payout=${payout} | fbclid={fbclid}")
+    logger.info(f"Inserting conversion_signal: event_id={row.get('event_id')} | payout=${row.get('payout')}")
     
     try:
         # insert_rows_json with automatic retry on transient failures
@@ -129,11 +119,11 @@ def insert_conversion_signal(
             logger.error(f"BigQuery insert_rows_json errors: {errors}")
             raise Exception(f"Failed to insert conversion_signal: {errors}")
         
-        logger.info(f"✓ Successfully inserted conversion_signal: {event_id} | ${payout}")
+        logger.info(f"✓ Successfully inserted conversion_signal: {row.get('event_id')} | ${row.get('payout')}")
         return True
         
     except Exception as e:
-        logger.error(f"BigQuery insert failed for conversion {event_id}: {str(e)}")
+        logger.error(f"BigQuery insert failed for conversion {row.get('event_id')}: {str(e)}")
         raise
 
 

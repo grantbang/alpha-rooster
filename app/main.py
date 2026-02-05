@@ -6,12 +6,13 @@ Phase 3.5: BigQuery Integration
 import os
 import logging
 import uuid
-from fastapi import FastAPI, Request, Form, HTTPException
+from fastapi import FastAPI, Request, Form, HTTPException, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from urllib.parse import urlencode
+from datetime import datetime
 
 # Import BigQuery client
 from app.bigquery_client import insert_user_event, validate_connection
@@ -247,6 +248,76 @@ async def get_game(request: Request, fbclid: str | None = None):
         "fbclid": fbclid or "demo",
         "pixel_id": os.getenv("META_PIXEL_ID", ""),
     })
+
+# ============================================================================
+# PHASE 4.1: POSTBACK ENDPOINT
+# ============================================================================
+
+@app.get("/postback")
+async def maxbounty_postback(
+    request: Request,
+    subId1: str = Query(..., alias="subId1", description="Event ID from click"),
+    payout: float = Query(..., description="Payout amount from MaxBounty"),
+    secret: str = Query(..., description="Security token")
+):
+    """
+    MaxBounty Postback Endpoint - Receives conversion notifications
+    
+    Called by MaxBounty when a user completes the insurance quote form.
+    URL format: https://playtosave.net/postback?subId1=EVENT_ID&payout=6.75&secret=YOUR_SECRET
+    
+    Args:
+        subId1: The event_id we passed in the tracking link (fbclid)
+        payout: The payout amount (usually $6.75)
+        secret: Security token to verify request is from MaxBounty
+    
+    Returns:
+        dict: Success response with event_id
+    
+    Raises:
+        HTTPException: If secret token is invalid
+    """
+    logger.info(f"📡 Postback received: event_id={subId1}, payout=${payout}")
+    
+    # Security: Verify secret token
+    expected_secret = os.getenv("AFFILIATE_SECRET")
+    if not expected_secret:
+        logger.error("❌ AFFILIATE_SECRET not configured in environment")
+        raise HTTPException(status_code=500, detail="Server configuration error")
+    
+    if secret != expected_secret:
+        logger.warning(f"⚠️  Invalid secret token from IP: {request.client.host}")
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    # Log conversion to BigQuery
+    try:
+        from app.bigquery_client import insert_conversion_signal
+        
+        conversion_data = {
+            "event_id": subId1,
+            "fbclid": None,  # Will be None for postback (we have it in user_events)
+            "payout": payout,
+            "offer_id": "29678",  # YourInsurancePath Auto Insurance
+            "conversion_time": datetime.utcnow().isoformat(),
+            "raw_postback": str(request.url)  # Store full URL for debugging
+        }
+        
+        insert_conversion_signal(conversion_data)
+        logger.info(f"✅ Conversion logged to BigQuery: {subId1}")
+        
+    except Exception as e:
+        logger.error(f"❌ BigQuery insert failed for conversion: {e}")
+        # Don't fail the postback - MaxBounty needs 200 response
+    
+    # TODO Phase 4.2: Send conversion event to Facebook CAPI
+    # This will close the attribution loop and improve ad performance
+    
+    return {
+        "status": "success",
+        "event_id": subId1,
+        "payout": payout,
+        "message": "Conversion tracked"
+    }
 
 if __name__ == "__main__":
     import uvicorn
