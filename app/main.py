@@ -53,55 +53,17 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 # Setup Jinja2 templates
 templates = Jinja2Templates(directory="app/templates")
 
-# Root endpoint - Test that server is running
+# Root endpoint - Landing page with Facebook domain verification
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     """
-    Test endpoint to verify FastAPI is working.
+    Root landing page. Uses base.html template which includes Facebook domain verification meta tag.
+    This page serves as a simple landing until the full game flow is built.
     """
     logger.info("Root endpoint accessed")
-    return """
-    <html>
-        <head>
-            <title>Alpha Rooster - Server Running</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    max-width: 800px;
-                    margin: 50px auto;
-                    padding: 20px;
-                    text-align: center;
-                }
-                h1 { color: #2ecc71; }
-                .status { 
-                    background: #ecf0f1; 
-                    padding: 20px; 
-                    border-radius: 8px;
-                    margin: 20px 0;
-                }
-                code {
-                    background: #34495e;
-                    color: #ecf0f1;
-                    padding: 2px 6px;
-                    border-radius: 3px;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>✅ Alpha Rooster Server Running!</h1>
-            <div class="status">
-                <h2>Phase 3.1: Local Development Setup</h2>
-                <p><strong>Status:</strong> Server is operational</p>
-                <p><strong>Next:</strong> Build pre-qualifier form (Phase 3.2)</p>
-            </div>
-            <div class="status">
-                <h3>Quick Test:</h3>
-                <p>If you can see this page, your FastAPI server is working correctly.</p>
-                <p>Access at: <code>http://localhost:8080</code></p>
-            </div>
-        </body>
-    </html>
-    """
+    return templates.TemplateResponse("home.html", {
+        "request": request
+    })
 
 # Health check endpoint
 @app.get("/health")
