@@ -309,8 +309,27 @@ async def maxbounty_postback(
         logger.error(f"❌ BigQuery insert failed for conversion: {e}")
         # Don't fail the postback - MaxBounty needs 200 response
     
-    # TODO Phase 4.2: Send conversion event to Facebook CAPI
-    # This will close the attribution loop and improve ad performance
+    # Phase 4.2: Send conversion event to Facebook CAPI
+    # This closes the attribution loop and improves ad performance
+    try:
+        from app.facebook_capi import send_conversion_event
+        
+        # Lookup fbclid from original event (stored in user_events table)
+        # For now we'll use event_id as fbclid since they match in our flow
+        # TODO: Query BigQuery user_events to get actual fbclid if needed
+        
+        send_conversion_event(
+            event_id=subId1,
+            fbclid=subId1,  # In our flow, event_id IS the fbclid from the click
+            payout=payout,
+            user_agent=request.headers.get("user-agent"),
+            client_ip=request.client.host if request.client else None
+        )
+        logger.info(f"📡 CAPI conversion event sent for {subId1}")
+        
+    except Exception as e:
+        logger.error(f"❌ CAPI event failed: {e}")
+        # Don't fail the postback - MaxBounty needs 200 response
     
     return {
         "status": "success",

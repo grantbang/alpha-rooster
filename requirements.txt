@@ -50,13 +50,13 @@ python-dotenv==1.0.0
 google-cloud-bigquery==3.14.1
 
 # ========================================
-# META/FACEBOOK (Phase 4 - CAPI)
+# FACEBOOK/META (Phase 4.2 - CAPI)
 # ========================================
 
-# Facebook-Business - Meta Marketing API SDK
-# What: Official SDK for Meta Conversions API (CAPI)
-# Why: Sends server-side conversion events to improve ad attribution
-# Used for: Event(), EventRequest(), UserData() objects
+# Facebook-Business - Meta Marketing API & Conversions API SDK
+# What: Sends server-side conversion events to Facebook
+# Why: Closes attribution loop, improves ad targeting & ROAS
+# Used for: Event(), EventRequest(), UserData() for Purchase events
 facebook-business==19.0.0
 
 # ========================================
