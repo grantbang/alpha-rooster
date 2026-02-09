@@ -12,6 +12,7 @@ from facebook_business.adobjects.serverside.event import Event
 from facebook_business.adobjects.serverside.event_request import EventRequest
 from facebook_business.adobjects.serverside.user_data import UserData
 from facebook_business.adobjects.serverside.custom_data import CustomData
+from facebook_business.adobjects.serverside.action_source import ActionSource
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +101,7 @@ def send_conversion_event(
             user_data=user_data,
             custom_data=custom_data,
             event_source_url="https://playtosave.net",
-            action_source="website"
+            action_source=ActionSource.WEBSITE
         )
         
         # Send event request
@@ -171,7 +172,7 @@ def send_page_view_event(
             event_id=event_id,
             user_data=user_data,
             event_source_url=event_source_url,
-            action_source="website"
+            action_source=ActionSource.WEBSITE
         )
         
         event_request = EventRequest(
