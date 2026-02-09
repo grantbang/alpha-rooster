@@ -3,24 +3,29 @@
 > **Instructions:** Check off tasks as you complete them. Add verification proof (screenshot filename, query result, etc.) in notes.
 
 **Started:** January 22, 2026  
-**Current Phase:** Phase 3.6 (Cloud Run Deployment - COMPLETE), Phase 4.1 (Postback Endpoint) NEXT  
+**Current Phase:** Phase 4 (Conversion Tracking - COMPLETE), Phase 1.3 (Meta Setup) IN PROGRESS  
 **Strategy Framework:** Mechanical Arbitrage (See FACEBOOK_ADS_STRATEGY.md)  
-**Last Updated:** February 5, 2026
+**Last Updated:** February 9, 2026
 
 ---
 
 ## 📊 Overall Progress Summary
 
-**Phase 1: Foundation** - 40% Complete (9/22 tasks)
+**Phase 1: Foundation** - 65% Complete (14/22 tasks)
 - ✅ Domain & email setup complete
 - ✅ Coming soon page live at playtosave.net
 - ✅ MaxBounty account APPROVED (ID: 784915)
 - ✅ First CPA offer approved (Auto Insurance #29678, $6.75/lead)
 - ✅ Tracking link configured with SubID1
 - ✅ GCP project created and configured (rooster-486417)
-- ❌ Meta Business Manager not started (Phase 1.3 - 8 tasks)
+- ✅ BigQuery dataset and tables created
+- ✅ Meta Business Manager created ("Play To Save")
+- ✅ Domain verified (playtosave.net)
+- ✅ Meta Pixel created (ID: 882262151388675)
+- ✅ CAPI Access Token generated and tested
+- 🔄 Meta setup in progress (Phase 1.3 - 5/11 tasks complete)
+- ❌ Facebook Page not created yet (Task 1.3.3)
 - ❌ Legal docs not started (Phase 1.4)
-- ❌ Domain connection pending (playtosave.net → Cloud Run)
 
 **Phase 2: Creative Arsenal** - 0% Complete (0/13 tasks)
 - ⚠️ **UPDATED:** Now follows 3:2:2 Dynamic Creative framework
@@ -29,7 +34,7 @@
 - ❌ 2 headline variants not written
 - 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md Sections 3.1-3.4
 
-**Phase 3: Game App** - 90% Complete (27/30 tasks)
+**Phase 3: Game App** - 100% Complete (30/30 tasks) ✅
 - ✅ Local development complete (Phase 3.1)
 - ✅ Pre-qualifier complete (Phase 3.2)
 - ✅ Game engine complete (Phase 3.3)
@@ -39,13 +44,17 @@
 - ✅ BigQuery tracking complete (Phase 3.5)
 - ✅ Facebook attribution working end-to-end
 - ✅ Cloud Run deployment complete (Phase 3.6)
-- ✅ Production funnel verified working
-- ❌ Mobile testing not complete (Phase 3.7)
-- ❌ Custom domain (playtosave.net) not connected to Cloud Run
+- ✅ Production funnel verified working at playtosave.net
+- ✅ Mobile testing complete (Phase 3.7)
+- ✅ Custom domain (playtosave.net) connected to Cloud Run
 
-**Phase 4: Conversion Tracking** - 0% Complete (0/8 tasks)
-- ❌ Postback endpoint not built (CRITICAL - blocks earning money)
-- ❌ CAPI integration not built (blocks Facebook optimization)
+**Phase 4: Conversion Tracking** - 100% Complete (8/8 tasks) ✅
+- ✅ Postback endpoint built and tested (CRITICAL - earning money enabled)
+- ✅ CAPI integration built and tested (Facebook optimization enabled)
+- ✅ MaxBounty postback configured with secret parameter
+- ✅ End-to-end attribution loop working (MaxBounty → BigQuery → Facebook)
+- ✅ Test conversion sent and verified in all systems
+- ✅ ActionSource enum bug fixed and deployed
 - 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md Section 1.1 & 1.4
 
 **Phase 5-6** - 0% Complete
@@ -53,18 +62,24 @@
 - 📖 **Reference:** FACEBOOK_ADS_STRATEGY.md for complete launch strategy
 
 **Next Steps (Priority Order):**
-1. 🌐 **BLOCKER:** Connect playtosave.net domain to Cloud Run (30 min)
-2. 📡 **BLOCKER:** Build postback endpoint (Phase 4.1, 1 hour)
-3. 🔗 **BLOCKER:** Build CAPI integration (Phase 4.2, 1 hour)
-4. 📱 **TESTING:** Mobile testing (Phase 3.7, 15 min)
-5. 📄 **COMPLIANCE:** Create Privacy/Terms pages (Phase 1.4, 1 hour)
-6. 🎯 **META SETUP:** Complete Phase 1.3 (Meta Business Manager, 3 hours)
-   - Domain verification
-   - Business Page creation
-   - 3 posts published
-   - $15 warming campaign (3 days)
-7. 🎨 **CREATIVE:** Build 3:2:2 ad matrix (Phase 2, 4 hours)
-8. 🚀 **LAUNCH:** First campaign (Phase 6, follows FACEBOOK_ADS_STRATEGY.md)
+1. 📘 **IN PROGRESS:** Complete Phase 1.3 (Meta Business Manager setup)
+   - ✅ Meta Business Manager created
+   - ✅ Domain verification complete (playtosave.net)
+   - ✅ Meta Pixel created (ID: 882262151388675)
+   - ✅ CAPI Access Token generated and tested
+   - ❌ **NEXT:** Create Facebook Business Page (Task 1.3.3, 20 min)
+   - ❌ Upload branding assets (profile + cover photo, 15 min)
+   - ❌ Publish 3 warming posts (30 min)
+   - ❌ Run $15 warming campaign (3 days)
+2. 📄 **COMPLIANCE:** Create Privacy/Terms pages (Phase 1.4, 1 hour)
+3. 🎨 **CREATIVE:** Build 3:2:2 ad matrix (Phase 2, 4 hours)
+4. 🚀 **LAUNCH:** First campaign (Phase 6, follows FACEBOOK_ADS_STRATEGY.md)
+
+**Recent Completions:**
+- ✅ Phase 4.1: Postback endpoint (February 5, 2026)
+- ✅ Phase 4.2: CAPI integration (February 9, 2026)
+- ✅ Task 1.3.7: Meta Pixel created (February 9, 2026)
+- ✅ Task 1.3.8: CAPI Access Token tested (February 9, 2026)
 
 **Strategic Framework:**
 - 📖 **Master Guide:** FACEBOOK_ADS_STRATEGY.md (complete mechanical blueprint)
@@ -124,73 +139,74 @@
   - Notes: ✅ COMPLETED February 3, 2026 - Real offer live in funnel
 
 ### 1.2 Google Cloud Platform Setup
-- [ ] **1.2.1** GCP Project created: `rooster-social-game`
-  - Verification: Project ID = 
-  - Screenshot: `tests/gcp_project.png`
-- [ ] **1.2.2** APIs enabled (Cloud Run, BigQuery, Secret Manager)
-  - Verification: Can see APIs in console
-  - Screenshot: `tests/gcp_apis.png`
-- [ ] **1.2.3** Billing account linked
+- [x] **1.2.1** GCP Project created: `rooster-486417`
+  - Verification: Project ID = rooster-486417
+  - Screenshot: Production deployment verified
+- [x] **1.2.2** APIs enabled (Cloud Run, BigQuery, Secret Manager)
+  - Verification: All services operational
+  - Cloud Run: rooster-game service deployed
+  - Secret Manager: meta-pixel-id, meta-access-token, affiliate-secret
+- [x] **1.2.3** Billing account linked
   - Budget alerts set: $50 warning, $100 limit
-  - Notes:
-- [ ] **1.2.4** Service account created
-  - Name: `rooster-app`
-  - JSON key downloaded and stored securely
-- [ ] **1.2.5** BigQuery dataset and tables created
+  - Notes: ✅ COMPLETED - Billing active
+- [x] **1.2.4** Service account created
+  - Name: Default compute service account
+  - IAM permissions: secretAccessor role granted
+  - Notes: ✅ COMPLETED - Service account configured
+- [x] **1.2.5** BigQuery dataset and tables created
   - Dataset: `rooster_data`
   - Tables: `game_events`, `conversion_signals`
   - View: `view_offer_performance`
-  - Verification query result:
-    ```sql
-    SELECT COUNT(*) FROM `rooster_data.game_events`
-    -- Result: [0 or number]
-    ```
+  - Verification query result: ✅ Tables operational, test data verified
+  - Notes: ✅ COMPLETED February 3, 2026
 
 ### 1.3 Meta Business Manager Setup
-- [ ] **1.3.1** Business Manager account created
-  - Business name: PlayToSave
+- [x] **1.3.1** Business Manager account created
+  - Business name: Play To Save
   - Business email: info@playtosave.net
   - URL: https://business.facebook.com/
-  - Notes:
-- [ ] **1.3.2** Domain verification
+  - Notes: ✅ COMPLETED February 9, 2026
+- [x] **1.3.2** Domain verification
   - Domain added: playtosave.net
-  - DNS TXT record added to Namecheap
-  - Verification status: Pending (24-48 hours)
-  - Notes:
-- [ ] **1.3.3** Payment method added
-  - Card added: ✓
-  - Spending limit set: $150/day (safety limit)
-  - Budget alert: $100/day warning
-  - Notes:
-- [ ] **1.3.4** Meta Pixel created
-  - Pixel ID: 
-  - Pixel name: PlayToSavePixel
-  - Install verification: Test Events shows events ✓
-- [ ] **1.3.5** CAPI setup complete
-  - Access token generated: ✓
-  - Event deduplication implemented (event_id matching): ✓
-  - Test event sent successfully: [Timestamp]
-  - Event Match Quality score: > 80% ✓
-  - Screenshot: `tests/meta_capi_working.png`
-- [ ] **1.3.6** Facebook Business Page created
-  - Page name: PlayToSave
-  - Category: Financial Service
-  - Profile picture uploaded (400x400): ✓
-  - Cover photo uploaded (820x312): ✓
-  - Notes:
-- [ ] **1.3.7** Page content published (warming phase)
-  - Post 1 (Educational tip): ✓
-  - Post 2 (Engagement question): ✓
-  - Post 3 (Helpful fact): ✓
-  - Notes: See FACEBOOK_ADS_STRATEGY.md Section 2.1 for templates
-- [ ] **1.3.8** Account warming campaign complete
-  - Campaign type: "Page Likes" / "Engagement"
+  - Verification method: Meta tag in base.html
+  - Verification status: ✅ VERIFIED
+  - Notes: ✅ COMPLETED February 9, 2026
+- [ ] **1.3.3** Facebook Business Page created
+  - Page name: PlayToSave (or "Play To Save")
+  - Category: Financial Service / Website
+  - Page added to Business Manager: Pending
+  - Notes: 🔄 NEXT TASK - See docs/PHASE1.3_META_SETUP.md Task 1.3.3
+- [ ] **1.3.4** Branding assets uploaded
+  - Profile picture uploaded (400x400): Pending
+  - Cover photo uploaded (820x312): Pending
+  - Notes: See docs/PHASE1.3_META_SETUP.md Task 1.3.4 for Canva templates
+- [ ] **1.3.5** Page content published (warming phase)
+  - Post 1 (Money-saving tip): Pending
+  - Post 2 (Gamification hook): Pending
+  - Post 3 (Value proposition): Pending
+  - Notes: See docs/PHASE1.3_META_SETUP.md Task 1.3.5 for templates
+- [ ] **1.3.6** Account warming campaign complete
+  - Campaign type: "Engagement" → "Page Likes"
   - Daily budget: $5/day
   - Duration: 3 days
-  - Total spend: $15 ✓
-  - Result: 50-200 page likes
-  - No policy violations: ✓
-  - Notes: CRITICAL - Do this BEFORE launching real campaigns
+  - Total spend: $15
+  - Expected result: 30-60 page likes
+  - No policy violations: Pending
+  - Notes: See docs/PHASE1.3_META_SETUP.md Task 1.3.6
+- [x] **1.3.7** Meta Pixel created
+  - Pixel ID: 882262151388675
+  - Pixel name: PlayToSave Pixel
+  - Install verification: Test Events shows events ✓
+  - Notes: ✅ COMPLETED February 9, 2026
+- [x] **1.3.8** CAPI setup complete
+  - Access token generated: ✅ EAARCKkJOVb0... (stored in Secret Manager)
+  - Event deduplication implemented (event_id matching): ✓
+  - Test event sent successfully: February 9, 2026 16:13:02 UTC
+  - Facebook API confirmed: events_received=1 ✓
+  - BigQuery verified: Conversion logged ✓
+  - ActionSource bug fixed: ✓
+  - Screenshot: Cloud Run logs show "✅ CAPI event sent successfully"
+  - Notes: ✅ COMPLETED February 9, 2026 - Full end-to-end working
 
 ### 1.4 Legal Foundation
 - [ ] **1.4.1** Privacy Policy created
