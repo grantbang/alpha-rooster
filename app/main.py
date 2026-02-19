@@ -10,12 +10,16 @@ from fastapi import FastAPI, Request, Form, HTTPException, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from urllib.parse import urlencode
 from datetime import datetime
 
 # Import BigQuery client
 from app.bigquery_client import insert_user_event, validate_connection
+
+# Import offer configuration
+from app.offer_config import get_offer_config, build_maxbounty_url
 
 # Load environment variables
 load_dotenv()
@@ -64,6 +68,18 @@ async def root(request: Request):
     return templates.TemplateResponse("home.html", {
         "request": request
     })
+
+# Privacy Policy
+@app.get("/privacy", response_class=HTMLResponse)
+async def privacy_policy(request: Request):
+    """Render privacy policy page."""
+    return templates.TemplateResponse("privacy.html", {"request": request, "pixel_id": os.getenv("META_PIXEL_ID", "")})
+
+# Terms of Service
+@app.get("/terms", response_class=HTMLResponse)
+async def terms_of_service(request: Request):
+    """Render terms of service page."""
+    return templates.TemplateResponse("terms.html", {"request": request, "pixel_id": os.getenv("META_PIXEL_ID", "")})
 
 # Health check endpoint
 @app.get("/health")
@@ -207,9 +223,49 @@ async def get_game(request: Request, fbclid: str | None = None):
     
     return templates.TemplateResponse("game.html", {
         "request": request,
-        "fbclid": fbclid or "demo",
+        "fbclid": fbclid or "",
+        "event_id": event_id,
         "pixel_id": os.getenv("META_PIXEL_ID", ""),
     })
+
+
+class GameSubmitRequest(BaseModel):
+    event_id: str
+    fbclid: str = ""
+    first_name: str
+    last_name: str
+    email: str
+
+
+@app.post("/game/submit")
+async def post_game_submit(payload: GameSubmitRequest):
+    """
+    Log name/email capture from game page to BigQuery.
+    Called via fetch() just before redirect to Champion with prepop.
+
+    Args:
+        payload: JSON body with event_id, fbclid, first_name, last_name, email
+
+    Returns:
+        dict: {"status": "ok"}
+    """
+    logger.info(f"📝 Game submit: event_id={payload.event_id} email={payload.email}")
+
+    try:
+        insert_user_event(
+            event_id=payload.event_id,
+            event_type="game_submit",
+            fbclid=payload.fbclid or None,
+            variant_id="champion-auto",
+            user_agent=None
+        )
+        logger.info(f"✅ BigQuery game_submit logged for event_id={payload.event_id} email={payload.email}")
+    except Exception as e:
+        logger.error(f"❌ BigQuery game_submit failed: {e}")
+        # Non-blocking — don't stop the redirect
+
+    return {"status": "ok"}
+
 
 # ============================================================================
 # PHASE 4.1: POSTBACK ENDPOINT
@@ -299,6 +355,105 @@ async def maxbounty_postback(
         "payout": payout,
         "message": "Conversion tracked"
     }
+
+# ============================================================
+# NEW: Dynamic Offer-Specific Qualification Routes
+# ============================================================
+
+@app.get("/qualify/{offer_slug}", response_class=HTMLResponse)
+async def get_qualify_offer(request: Request, offer_slug: str, fbclid: str | None = None):
+    """
+    Render offer-specific pre-qualifier form.
+    Dynamic route: /qualify/champion-auto, /qualify/champion-home, etc.
+    
+    Args:
+        offer_slug: Offer identifier (e.g., "champion-auto")
+        fbclid: Facebook click ID from ad URL parameters
+    
+    Returns:
+        HTMLResponse: Pre-qualifier form or 404 if offer not found
+    """
+    logger.info(f"/qualify/{offer_slug} GET accessed fbclid={fbclid}")
+    
+    # Get offer configuration
+    offer_config = get_offer_config(offer_slug)
+    if not offer_config:
+        logger.warning(f"Offer not found or inactive: {offer_slug}")
+        raise HTTPException(status_code=404, detail="Offer not found")
+    
+    # Generate event ID for tracking
+    event_id = str(uuid.uuid4())
+    
+    # Log page view to BigQuery
+    try:
+        insert_user_event(
+            event_id=event_id,
+            event_type="qualify_page_view",
+            fbclid=fbclid,
+            variant_id=offer_slug,
+            user_agent=request.headers.get("user-agent")
+        )
+    except Exception as e:
+        logger.error(f"BigQuery insert failed for qualify_page_view: {e}")
+    
+    # Render qualify_offer.html template with orange branding
+    return templates.TemplateResponse("qualify_offer.html", {
+        "request": request,
+        "offer_slug": offer_slug,
+        "offer_name": offer_config["name"],
+        "fbclid": fbclid or "",
+        "event_id": event_id,
+        "pixel_id": os.getenv("META_PIXEL_ID", "")
+    })
+
+
+@app.post("/qualify/{offer_slug}/submit")
+async def post_qualify_offer(
+    request: Request,
+    offer_slug: str,
+    fbclid: str = Form(""),
+    event_id: str = Form(...)
+):
+    """
+    Simple redirect to MaxBounty - no form collection.
+    User just clicks button, we track the click, redirect to MaxBounty's funnel.
+    
+    Args:
+        offer_slug: Offer identifier
+        fbclid: Facebook click ID (hidden field)
+        event_id: Unique event ID (hidden field)
+    
+    Returns:
+        RedirectResponse: To MaxBounty offer
+    """
+    logger.info(f"/qualify/{offer_slug}/submit POST - redirecting to MaxBounty")
+    
+    # Get offer configuration
+    offer_config = get_offer_config(offer_slug)
+    if not offer_config:
+        raise HTTPException(status_code=404, detail="Offer not found")
+    
+    # Store click event in BigQuery
+    try:
+        insert_user_event(
+            event_id=event_id,
+            event_type="qualify_submit",
+            fbclid=fbclid or None,
+            variant_id=offer_slug,
+            user_agent=request.headers.get("user-agent")
+        )
+        logger.info(f"✅ Stored click for event_id={event_id}")
+    except Exception as e:
+        logger.error(f"❌ BigQuery insert failed: {e}")
+        # Don't block redirect if BigQuery fails
+    
+    # Build MaxBounty redirect URL (no prepop, just tracking)
+    redirect_url = build_maxbounty_url(offer_config, event_id, {}, fbclid)
+    
+    logger.info(f"🚀 Redirecting to MaxBounty: {redirect_url[:100]}...")
+    
+    # Redirect to MaxBounty offer
+    return RedirectResponse(url=redirect_url, status_code=302)
 
 if __name__ == "__main__":
     import uvicorn

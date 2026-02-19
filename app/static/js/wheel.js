@@ -9,14 +9,14 @@ const spinButton = document.getElementById('spinButton');
 const resultDiv = document.getElementById('result');
 const resultText = document.getElementById('resultText');
 
-// Wheel configuration
+// Wheel configuration - savings tiers
 const segments = [
-    { label: 'BRONZE', color: '#cd7f32', value: 'bronze' },
-    { label: 'SILVER', color: '#c0c0c0', value: 'silver' },
-    { label: 'GOLD', color: '#ffd700', value: 'gold' },
-    { label: 'BRONZE', color: '#cd7f32', value: 'bronze' },
-    { label: 'SILVER', color: '#c0c0c0', value: 'silver' },
-    { label: 'GOLD', color: '#ffd700', value: 'gold' },
+    { label: 'BRONZE', color: '#cd7f32', tier: 'Bronze' },
+    { label: 'SILVER', color: '#95a5a6', tier: 'Silver' },
+    { label: 'GOLD',   color: '#f1c40f', tier: 'Gold'   },
+    { label: 'BRONZE', color: '#cd7f32', tier: 'Bronze' },
+    { label: 'SILVER', color: '#95a5a6', tier: 'Silver' },
+    { label: 'GOLD',   color: '#f1c40f', tier: 'Gold'   },
 ];
 
 const numSegments = segments.length;
@@ -48,9 +48,9 @@ function drawWheel() {
         ctx.translate(centerX, centerY);
         ctx.rotate(angle + segmentAngle / 2);
         ctx.textAlign = 'center';
-        ctx.fillStyle = '#000';
-        ctx.font = 'bold 20px Arial';
-        ctx.fillText(segments[i].label, radius / 1.5, 10);
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText(segments[i].label, radius / 1.5, 6);
         ctx.restore();
     }
 
@@ -147,17 +147,22 @@ function showResult(segment) {
     });
 
     // Show result
+    const tierColors = { 'Gold': '#f39c12', 'Silver': '#7f8c8d', 'Bronze': '#cd7f32' };
+    const tierColor = tierColors[segment.tier] || '#27ae60';
     resultText.innerHTML = `
-        <strong style="font-size: 32px; color: ${segment.color}; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
-            ${segment.label} STATUS
+        <strong style="font-size: 36px; color: ${tierColor};">
+            🏆 ${segment.tier} Savings Tier
         </strong><br/>
-        <span style="font-size: 18px; color: #2c3e50;">
-            You've unlocked exclusive ${segment.label.toLowerCase()}-tier savings!
+        <span style="font-size: 18px; color: #2c3e50; display: block; margin: 10px 0;">
+            You qualified for a <strong>${segment.tier} level</strong> quote — drivers in your area are saving!
+        </span>
+        <span style="font-size: 14px; color: #7f8c8d;">
+            Claim your free quote below — takes 60 seconds, no SSN required.
         </span>
     `;
     resultDiv.classList.add('show');
 
-    console.log(`User won: ${segment.value} tier`);
+    console.log(`User won: ${segment.tier} tier`);
 }
 
 // Initialize

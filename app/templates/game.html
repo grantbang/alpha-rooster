@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Spin to Win!{% endblock %}
+{% block title %}See How Much You Could Save on Car Insurance{% endblock %}
 
 {% block extra_head %}
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -19,6 +19,21 @@
 
     #spinButton {
         margin-top: 20px;
+        background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+        font-size: 22px;
+        padding: 18px 40px;
+        letter-spacing: 1px;
+    }
+
+    #spinButton:hover {
+        background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+        transform: scale(1.03);
+    }
+
+    #spinButton:disabled {
+        background: #bdc3c7;
+        transform: none;
+        cursor: not-allowed;
     }
 
     #result {
@@ -42,11 +57,69 @@
 
     #claimButton {
         background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-        margin-top: 15px;
+        margin-top: 20px;
+        font-size: 20px;
+        padding: 18px 40px;
+        animation: pulse 1.5s infinite;
+        width: 100%;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(39,174,96,0.4); }
+        70% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(39,174,96,0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(39,174,96,0); }
     }
 
     #claimButton:hover {
         background: linear-gradient(135deg, #229954 0%, #27ae60 100%);
+        animation: none;
+        transform: scale(1.05);
+    }
+
+    #claimForm {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    #claimForm input {
+        width: 100%;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+    }
+
+    #claimForm input:focus {
+        outline: none;
+        border-color: #27ae60;
+    }
+
+    #claimForm input::placeholder {
+        color: #aaa;
+    }
+
+    #claimForm label {
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 4px;
+        display: block;
+        font-weight: 600;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 10px;
+    }
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+    .form-group {
+        margin-bottom: 4px;
     }
 
     .disclaimer {
@@ -60,60 +133,113 @@
 
 {% block content %}
 <div class="container game-container">
-    <h1>🎯 Spin the Wheel!</h1>
-    <p class="subtitle">Click the button below to discover your reward tier</p>
+    <h1>🚗 Are You Overpaying for Car Insurance?</h1>
+    <p class="subtitle">Spin to see your savings tier for car insurance</p>
 
     <canvas id="wheelCanvas" width="400" height="400"></canvas>
 
-    <button id="spinButton">SPIN NOW</button>
+    <button id="spinButton">🎯 SPIN TO SEE MY SAVINGS</button>
 
     <div id="result">
-        <h2>🎉 Congratulations!</h2>
+        <h2>🎉 You Qualify!</h2>
         <p id="resultText"></p>
-        <button id="claimButton">CLAIM YOUR REWARD</button>
+
+        <form id="claimForm">
+            <p style="font-size: 15px; color: #2c3e50; margin-bottom: 16px; font-weight: 600;">
+                Enter your details to claim your free quote:
+            </p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="John" required autocomplete="given-name" />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Smith" required autocomplete="family-name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="john@example.com" required autocomplete="email" />
+            </div>
+            <button type="submit" id="claimButton">✅ GET MY FREE QUOTE NOW →</button>
+        </form>
     </div>
 
     <p class="disclaimer">
-        By clicking "Claim Your Reward," you'll be redirected to our partner offer page.
-        No purchase necessary. You're simply requesting a free quote.
+        By submitting your information, you agree to be contacted by a licensed insurance partner regarding auto insurance quotes.
+        No SSN required. No obligation to purchase.
+        This site is operated by Play to Save, an independent advertising service. We may receive compensation when you submit your information.
+        <br><br>
+        <a href="/privacy" style="color:#888;">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="/terms" style="color:#888;">Terms of Service</a> &nbsp;|&nbsp;
+        <a href="/privacy#data" style="color:#888;">Do Not Sell My Information</a>
     </p>
 </div>
 
 <script src="/static/js/wheel.js"></script>
 <script>
-    // Pass fbclid from backend to JavaScript
     const fbclid = "{{ fbclid }}";
+    const eventId = "{{ event_id }}";
 
     // Track ViewContent when game page loads
     if (typeof fbq !== 'undefined') {
         fbq('track', 'ViewContent', {
             content_name: 'Spin Wheel Game',
-            content_category: 'Game',
-            fbclid: fbclid
+            content_category: 'Auto Insurance',
+            value: 3.00,
+            currency: 'USD'
         });
         console.log('Meta Pixel: ViewContent tracked');
     }
 
-    // Track when user clicks claim button
-    document.getElementById('claimButton').addEventListener('click', function () {
-        // Track InitiateCheckout event before redirect
+    // Handle form submit - collect name/email, then prepop redirect to Champion
+    document.getElementById('claimForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName  = document.getElementById('lastName').value.trim();
+        const email     = document.getElementById('email').value.trim();
+
+        if (!firstName || !lastName || !email) return;
+
+        // Fire Lead pixel event
         if (typeof fbq !== 'undefined') {
-            fbq('track', 'InitiateCheckout', {
-                content_name: 'Claim Reward',
-                fbclid: fbclid
+            fbq('track', 'Lead', {
+                content_name: 'Champion Auto Insurance',
+                value: 3.00,
+                currency: 'USD'
             });
-            console.log('Meta Pixel: InitiateCheckout tracked');
+            console.log('Meta Pixel: Lead tracked');
         }
 
-        // MaxBounty Auto Insurance Offer - YourInsurancePath (#29678)
-        // SubID1 (s1) passes Facebook click ID for conversion tracking
-        const offerUrl = `https://afflat3c1.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/?o=29678&c=918277&a=784915&k=EAA49755014524075AD2568514DBE364&l=33293&s1=${fbclid}`;
-        console.log('Redirecting to offer:', offerUrl);
+        // Build prepop string per MaxBounty spec:
+        // &x=firstName%3DJohn%26lastName%3DSmith%26email%3Djohn%40example.com
+        const prepopRaw = `firstName=${firstName}&lastName=${lastName}&email=${email}`;
+        const prepopEncoded = encodeURIComponent(prepopRaw);
 
-        // Small delay to ensure pixel fires
+        // Champion Auto Insurance - MaxBounty Offer #22134
+        // s1=event_id (postback tracking), s2=fbclid (Facebook attribution)
+        const offerUrl = `https://afflat3c2.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/?o=22134&c=918277&a=784915&k=06FA1624995991BCD1B175746E5C9B06&l=22980&s1=${eventId}&s2=${fbclid}&x=${prepopEncoded}`;
+        console.log('Redirecting with prepop to Champion Auto:', offerUrl);
+
+        // Log to BigQuery via backend
+        fetch('/game/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_id: eventId,
+                fbclid: fbclid,
+                first_name: firstName,
+                last_name: lastName,
+                email: email
+            })
+        }).catch(err => console.error('BigQuery log failed (non-blocking):', err));
+
+        // Redirect after short delay to let pixel + fetch fire
         setTimeout(() => {
             window.location.href = offerUrl;
-        }, 300);
+        }, 400);
     });
 </script>
 {% endblock %}
