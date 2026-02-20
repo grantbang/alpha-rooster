@@ -1,0 +1,510 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Auto Insurance Rates — Fast, Free Quotes{% endblock %}
+
+{% block extra_head %}
+<style>
+  :root {
+    --champion-navy: #010952;
+    --champion-indigo: #283572;
+    --champion-mint: #3cf5a4;
+    --surface: #ffffff;
+    --surface-2: #f3f4f8;
+    --border: #e0e2ea;
+    --text: #111827;
+    --muted: #6b7280;
+    --cta: #007bff;
+    --cta-hover: #0069d9;
+    --radius: 12px;
+  }
+
+  body { background: #ffffff !important; padding: 0 !important; }
+
+  .lander {
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--surface);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .top-bar {
+    background: var(--surface);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(224, 226, 234, 0.9);
+  }
+
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .brand-left img {
+    height: 24px;
+    width: auto;
+    display: block;
+  }
+
+  /* Cohesive co-brand lockup (no pill UI): Champion logo × PlaytoSave logo */
+  .co-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .co-x {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 950;
+    color: var(--champion-indigo);
+    opacity: 0.9;
+    transform: translateY(-0.5px);
+    user-select: none;
+  }
+
+  .pts-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--champion-indigo);
+    font-weight: 950;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+  }
+
+  .pts-mark {
+    width: 24px;
+    height: 24px;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .pts-word {
+    font-size: 18px;
+    font-weight: 950;
+    letter-spacing: -0.4px;
+  }
+
+  .secure-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(243, 244, 248, 0.9);
+    border: 1px solid rgba(224, 226, 234, 0.95);
+    color: var(--champion-indigo);
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .secure-pill::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--champion-mint);
+    box-shadow: 0 0 0 3px rgba(60, 245, 164, 0.18);
+  }
+
+  .brand-meta {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 24px 20px 14px;
+    text-align: left;
+    background:
+      radial-gradient(900px 160px at 0% 0%, rgba(60,245,164,0.10) 0%, rgba(60,245,164,0) 60%),
+      radial-gradient(820px 180px at 100% 8%, rgba(1,9,82,0.05) 0%, rgba(1,9,82,0) 60%);
+  }
+
+  .hero h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.95rem;
+    font-weight: 850;
+    line-height: 1.12;
+    color: var(--champion-navy);
+    margin: 0 0 10px;
+    letter-spacing: -0.4px;
+  }
+
+  .hero p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1f2a63;
+    max-width: 52ch;
+  }
+
+  .trust-row {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .trust-item {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(224, 226, 234, 0.95);
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--champion-indigo);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .trust-item .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--champion-mint);
+    box-shadow: 0 0 0 3px rgba(60, 245, 164, 0.18);
+  }
+
+  /* Quote card */
+  .survey-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 10px 16px 18px;
+    overflow: hidden;
+  }
+
+  .survey-progress {
+    height: 8px;
+    background: #e0e2ea;
+  }
+
+  .survey-progress-bar {
+    height: 8px;
+    background: var(--champion-mint);
+    width: 0%;
+    transition: width 0.35s ease;
+  }
+
+  .survey-inner {
+    padding: 18px 16px 18px;
+    text-align: left;
+  }
+
+  .survey-inner h3 {
+    font-size: 14px;
+    font-weight: 850;
+    color: var(--champion-indigo);
+    margin: 0 0 4px;
+    letter-spacing: 0.2px;
+  }
+
+  .survey-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+
+  .form-row { display: flex; gap: 10px; }
+
+  .form-group { flex: 1; margin-bottom: 12px; }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 750;
+    color: var(--champion-indigo);
+    margin-bottom: 6px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 13px 12px;
+    border: 1px solid rgba(202, 202, 202, 1);
+    border-radius: 10px;
+    font-size: 16px;
+    background: #ffffff;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: rgba(40, 53, 114, 0.85);
+    box-shadow: 0 0 0 3px rgba(40, 53, 114, 0.12);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--cta);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .submit-btn:hover { background: var(--cta-hover); }
+
+  .mini-note {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Minimal watermark footer */
+  .watermark-footer {
+    padding: 16px 20px 22px;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid rgba(224, 226, 234, 0.95);
+    background: linear-gradient(180deg, rgba(243,244,248,0.55) 0%, rgba(255,255,255,1) 55%);
+  }
+
+  .watermark-brand {
+    margin: 0 0 10px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.55);
+  }
+
+  .watermark-steps-title {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 950;
+    color: var(--champion-navy);
+  }
+
+  .watermark-steps {
+    margin: 0 auto 10px;
+    padding-left: 18px;
+    text-align: left;
+    max-width: 62ch;
+    font-size: 11px;
+    line-height: 1.55;
+    color: rgba(40, 53, 114, 0.88);
+  }
+
+  .watermark-copy {
+    margin: 0 auto 10px;
+    max-width: 68ch;
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: rgba(107, 114, 128, 0.92);
+  }
+
+  .watermark-copy b { color: rgba(17, 24, 39, 0.75); }
+
+  .watermark-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 10.5px;
+    font-weight: 800;
+  }
+
+  .watermark-links a {
+    color: rgba(40, 53, 114, 0.85);
+    text-decoration: none;
+  }
+
+  .watermark-links a:hover { text-decoration: underline; }
+
+  /* Mobile tweaks */
+  @media (max-width: 520px) {
+    .top-bar { padding-left: 14px; padding-right: 14px; }
+    .brand-left img { height: 22px; }
+    .co-x { font-size: 16px; }
+    .pts-word { font-size: 16px; }
+    .pts-mark { width: 22px; height: 22px; }
+    .form-row { flex-direction: column; }
+    .survey-card { margin-left: 12px; margin-right: 12px; }
+    .hero h1 { font-size: 1.75rem; }
+    .trust-row { grid-template-columns: 1fr; }
+    .trust-item { justify-content: flex-start; }
+    .secure-pill { display: none; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="lander">
+  <div class="top-bar">
+    <div class="brand-left">
+      <div class="co-lockup" aria-label="Champion Auto Insurance co-branded with PlaytoSave">
+        <img src="/static/creatives/champion-logo-original.png" alt="Champion Auto Insurance" />
+        <span class="co-x" aria-hidden="true">×</span>
+        <span class="pts-logo" aria-label="PlaytoSave">
+          <svg class="pts-mark" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="ptsG" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#010952" />
+                <stop offset="1" stop-color="#3cf5a4" />
+              </linearGradient>
+            </defs>
+            <circle cx="14" cy="14" r="12" fill="#ffffff" stroke="rgba(1, 9, 82, 0.20)" stroke-width="2" />
+            <path d="M12 9.4c.25-.18.6-.17.83.02l7.2 5.5c.28.22.28.64 0 .86l-7.2 5.5c-.43.33-1.03.03-1.03-.51V10c0-.25.1-.48.2-.6z" fill="url(#ptsG)" />
+            <path d="M9.6 14h-.1" stroke="#3cf5a4" stroke-width="3" stroke-linecap="round" />
+          </svg>
+          <span class="pts-word">PlaytoSave</span>
+        </span>
+      </div>
+    </div>
+    <div class="secure-pill">Secure · No SSN</div>
+  </div>
+
+  <div class="hero">
+    <h1>Compare auto insurance rates in minutes</h1>
+    <p>Enter your info below — then you’ll finish a short questionnaire with our insurance partner to see available rates.</p>
+    <div class="trust-row">
+      <div class="trust-item"><span class="dot"></span>Free to compare</div>
+      <div class="trust-item"><span class="dot"></span>Fast results</div>
+      <div class="trust-item"><span class="dot"></span>No obligation</div>
+    </div>
+  </div>
+
+  <div class="survey-card">
+    <div class="survey-progress">
+      <div class="survey-progress-bar" id="progressBar"></div>
+    </div>
+    <div class="survey-inner">
+      <h3>Get your free quote</h3>
+      <p class="survey-sub">Enter your name and email to continue.</p>
+
+      <form id="claimForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" placeholder="First name" required autocomplete="given-name" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" placeholder="Last name" required autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <button type="submit" class="submit-btn">Continue</button>
+        <div class="mini-note">We use your info to match you with licensed insurance partners. No spam.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Consolidated disclosure footer (replaces separate proof + footer) -->
+  <div class="watermark-footer" aria-label="Disclosures and links">
+    <p class="watermark-brand">PlaytoSave.net</p>
+
+    <p class="watermark-steps-title">Exactly what happens next</p>
+    <ol class="watermark-steps">
+      <li><b>Step 1:</b> You enter your name + email on this page.</li>
+      <li><b>Step 2:</b> When you click <b>Continue</b>, we redirect you to <b>Champion Auto Insurance</b> to complete your quote.</li>
+      <li><b>Step 3:</b> You’ll answer a few quick questions there (ex: ZIP code, vehicle, drivers, mileage) to see available rates.</li>
+    </ol>
+
+    <p class="watermark-copy">
+      Transparency note: <b>PlaytoSave</b> is an independent advertising service. We don’t provide insurance quotes directly — we connect you to licensed partners.
+      By submitting your information, you agree to be contacted by a licensed insurance partner regarding auto insurance quotes.
+      No SSN required. No obligation to purchase. Actual savings vary.
+    </p>
+
+    <ul class="watermark-links">
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy#data">Do Not Sell My Info</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+    const fbclid = "{{ fbclid }}";
+    const eventId = "{{ event_id }}";
+
+    /* ── Progress bar animation (mimics Champion survey feel) ── */
+    const progressBar = document.getElementById('progressBar');
+    const inputs = document.querySelectorAll('#claimForm input');
+    const totalFields = inputs.length;
+
+    function updateProgress() {
+        let filled = 0;
+        inputs.forEach(input => { if (input.value.trim()) filled++; });
+        const pct = Math.round((filled / totalFields) * 100);
+        progressBar.style.width = pct + '%';
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('input', updateProgress);
+        input.addEventListener('focus', updateProgress);
+    });
+
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+            content_name: 'Champion Auto Insurance Lander',
+            content_category: 'Auto Insurance',
+            value: 3.00,
+            currency: 'USD'
+        });
+    }
+
+    document.getElementById('claimForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName  = document.getElementById('lastName').value.trim();
+        const email     = document.getElementById('email').value.trim();
+
+        if (!firstName || !lastName || !email) return;
+
+        /* Fill progress to 100% on submit */
+        progressBar.style.width = '100%';
+
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+                content_name: 'Champion Auto Insurance',
+                value: 3.00,
+                currency: 'USD'
+            });
+        }
+
+        const prepopRaw = `firstName=${firstName}&lastName=${lastName}&email=${email}`;
+        const prepopEncoded = encodeURIComponent(prepopRaw);
+        const offerUrl = `https://afflat3c2.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/?o=22134&c=918277&a=784915&k=06FA1624995991BCD1B175746E5C9B06&l=22980&s1=${eventId}&s2=${fbclid}&x=${prepopEncoded}`;
+
+        fetch('/game/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_id: eventId,
+                fbclid: fbclid,
+                first_name: firstName,
+                last_name: lastName,
+                email: email
+            })
+        }).catch(err => console.error('BigQuery log failed (non-blocking):', err));
+
+        setTimeout(() => { window.location.href = offerUrl; }, 400);
+    });
+</script>
+{% endblock %}

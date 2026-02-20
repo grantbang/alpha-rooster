@@ -196,6 +196,37 @@ async def post_qualify(
         logger.error(f"Unexpected error in /qualify: {e}")
         raise HTTPException(status_code=500, detail="Internal error")
 
+@app.get("/lander", response_class=HTMLResponse)
+async def get_lander(request: Request, fbclid: str | None = None):
+    """
+    Render the direct-response landing page (no game, form-first).
+    Logs lander_load event to BigQuery.
+
+    Args:
+        fbclid: Optional Facebook click id auto-appended by FB ads
+    """
+    logger.info(f"/lander GET accessed fbclid={fbclid}")
+
+    try:
+        event_id = str(uuid.uuid4())
+        insert_user_event(
+            event_id=event_id,
+            event_type="lander_load",
+            fbclid=fbclid,
+            variant_id="lander_v1",
+            user_agent=request.headers.get("user-agent")
+        )
+    except Exception as e:
+        logger.error(f"BigQuery insert failed for lander_load: {e}")
+
+    return templates.TemplateResponse("lander.html", {
+        "request": request,
+        "fbclid": fbclid or "",
+        "event_id": event_id,
+        "pixel_id": os.getenv("META_PIXEL_ID", ""),
+    })
+
+
 @app.get("/game", response_class=HTMLResponse)
 async def get_game(request: Request, fbclid: str | None = None):
     """
