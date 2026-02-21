@@ -268,6 +268,44 @@ class GameSubmitRequest(BaseModel):
     email: str
 
 
+class LanderSubmitRequest(BaseModel):
+    event_id: str
+    fbclid: str = ""
+    first_name: str
+    last_name: str
+    email: str
+
+
+@app.post("/lander/submit")
+async def post_lander_submit(payload: LanderSubmitRequest):
+    """
+    Log name/email capture from lander page to BigQuery.
+    Called via fetch() just before redirect to Champion with prepop.
+
+    Args:
+        payload: JSON body with event_id, fbclid, first_name, last_name, email
+
+    Returns:
+        dict: {"status": "ok"}
+    """
+    logger.info(f"📝 Lander submit: event_id={payload.event_id} email={payload.email}")
+
+    try:
+        insert_user_event(
+            event_id=payload.event_id,
+            event_type="lander_submit",
+            fbclid=payload.fbclid or None,
+            variant_id="lander_v1",
+            user_agent=None
+        )
+        logger.info(f"✅ BigQuery lander_submit logged for event_id={payload.event_id} email={payload.email}")
+    except Exception as e:
+        logger.error(f"❌ BigQuery lander_submit failed: {e}")
+        # Non-blocking — don't stop the redirect
+
+    return {"status": "ok"}
+
+
 @app.post("/game/submit")
 async def post_game_submit(payload: GameSubmitRequest):
     """

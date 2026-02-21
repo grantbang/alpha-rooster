@@ -492,7 +492,7 @@
         const prepopEncoded = encodeURIComponent(prepopRaw);
         const offerUrl = `https://afflat3c2.com/trk/lnk/A41B827D-15FA-4B0B-AD52-0CAB1F1B1F18/?o=22134&c=918277&a=784915&k=06FA1624995991BCD1B175746E5C9B06&l=22980&s1=${eventId}&s2=${fbclid}&x=${prepopEncoded}`;
 
-        fetch('/game/submit', {
+        fetch('/lander/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
